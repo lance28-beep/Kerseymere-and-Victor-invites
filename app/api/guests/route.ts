@@ -1,9 +1,29 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwn8Y6z70_-v-ODoWp_AZlUgfN-NRMXLMe8dMwBiq2DGcJreYKxOIsSsazvSXcFiOu8/exec'
+// ⚠️ IMPORTANT: Replace this with your NEW Google Apps Script deployment URL
+// This should be the URL from deploying google-apps-script/guest-management.js
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCX1T1hvqPc9Z_y3zVe-CQpYIgEHvttb9ZrhDCjmz9HpAadFPUCiS7nJVlGaDHSiUW/exec'
 
-// Guest interface matching the Google Sheets structure
+// New Guest interface matching the improved system
 export interface Guest {
+  id: string | number  // Support both UUID strings and numeric IDs
+  name: string
+  role: string
+  email?: string
+  contact?: string
+  message?: string
+  allowedGuests: number
+  companions: { name: string; relationship: string }[]
+  tableNumber: string
+  isVip: boolean
+  status: 'pending' | 'confirmed' | 'declined' | 'request'
+  addedBy?: string
+  createdAt?: string
+  updatedAt?: string
+}
+
+// Legacy interface for backward compatibility
+export interface LegacyGuest {
   Name: string
   Email: string
   RSVP: string
@@ -27,16 +47,29 @@ export async function GET() {
 
     const data = await response.json()
     
-    // Normalize the data to ensure Guest field is always present
-    // Handle both old format (without Guest) and new format (with Guest)
+    // Handle error response from Google Apps Script
+    if (data.error) {
+      throw new Error(data.error)
+    }
+
+    // Normalize guest data to ensure consistent format
     const normalizedData = Array.isArray(data) ? data.map((guest: any) => ({
-      Name: guest.Name || '',
-      Email: guest.Email || '',
-      RSVP: guest.RSVP || '',
-      Guest: guest.Guest || guest.GuestCount || '1', // Default to 1 if missing
-      Message: guest.Message || '',
+      ...guest,
+      id: String(guest.id), // Convert numeric IDs to strings for consistency
+      role: guest.role || 'Guest',
+      email: guest.email || '',
+      contact: guest.contact || '',
+      message: guest.message || '',
+      allowedGuests: parseInt(guest.allowedGuests) || 1,
+      companions: Array.isArray(guest.companions) ? guest.companions : [],
+      tableNumber: guest.tableNumber || '',
+      isVip: guest.isVip === true || guest.isVip === 'TRUE',
+      status: guest.status || 'pending',
+      addedBy: guest.addedBy || '',
+      createdAt: guest.createdAt || new Date().toISOString(),
+      updatedAt: guest.updatedAt || new Date().toISOString(),
     })) : []
-    
+
     return NextResponse.json(normalizedData, { status: 200 })
   } catch (error) {
     console.error('Error fetching guests:', error)
@@ -51,22 +84,44 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { Name, Email, RSVP, Guest, Message } = body
 
-    // Validation
-    if (!Name || typeof Name !== 'string') {
+    // Validation - Only Full Name and Attendance/RSVP Status are required
+    if (!body.name || typeof body.name !== 'string' || body.name.trim() === '') {
       return NextResponse.json(
-        { error: 'Name is required' },
+        { error: 'Full Name is required' },
+        { status: 400 }
+      )
+    }
+
+    if (!body.status || typeof body.status !== 'string') {
+      return NextResponse.json(
+        { error: 'Attendance/RSVP Status is required' },
+        { status: 400 }
+      )
+    }
+
+    // Validate status is one of the allowed values
+    const validStatuses = ['pending', 'confirmed', 'declined', 'request'];
+    if (!validStatuses.includes(body.status)) {
+      return NextResponse.json(
+        { error: 'Invalid RSVP status. Must be one of: pending, confirmed, declined, request' },
         { status: 400 }
       )
     }
 
     const guestData = {
-      Name: Name.trim(),
-      Email: Email?.trim() || 'Pending',
-      RSVP: RSVP?.trim() || '',
-      Guest: Guest?.trim() || '',
-      Message: Message?.trim() || '',
+      action: 'create',
+      name: body.name.trim(),
+      role: body.role?.trim() || 'Guest', // Optional - defaults to 'Guest'
+      email: body.email?.trim() || '',
+      contact: body.contact?.trim() || '',
+      message: body.message?.trim() || '',
+      allowedGuests: parseInt(body.allowedGuests) || 1,
+      companions: body.companions || [],
+      tableNumber: body.tableNumber?.trim() || '',
+      isVip: body.isVip === true,
+      status: body.status, // Required field
+      addedBy: body.addedBy?.trim() || '',
     }
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -82,6 +137,11 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await response.json()
+    
+    if (data.error) {
+      throw new Error(data.error)
+    }
+
     return NextResponse.json(data, { status: 201 })
   } catch (error) {
     console.error('Error adding guest:', error)
@@ -92,109 +152,41 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// PUT: Update an existing guest (requires action field for Google Apps Script)
+// PUT: Update an existing guest
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json()
-    const { Name, Email, RSVP, Guest, Message, originalName } = body
-
-    // Use originalName for lookup if provided, otherwise use Name
-    // This allows updating a guest even if the name changed
-    const lookupName = originalName?.trim() || Name?.trim()
 
     // Validation
-    if (!lookupName || typeof lookupName !== 'string') {
+    if (!body.id || typeof body.id !== 'string') {
       return NextResponse.json(
-        { error: 'Name is required' },
+        { error: 'Guest ID is required' },
         { status: 400 }
       )
     }
 
-    // Helper function to safely convert to string and trim
-    const safeString = (value: any): string => {
-      if (value === null || value === undefined) return ''
-      if (typeof value === 'number') return value.toString()
-      if (typeof value === 'string') return value.trim()
-      return String(value).trim()
-    }
-    
-    // Convert names to strings for comparison
-    const originalNameStr = safeString(originalName)
-    const nameStr = safeString(Name)
-    const nameChanged = originalNameStr && originalNameStr !== nameStr
-    
-    // Ensure we always send proper values (never undefined or null)
-    const updateData: any = {
+    const updateData = {
       action: 'update',
-      Email: safeString(Email) || 'Pending',
-      RSVP: safeString(RSVP),
-      Guest: safeString(Guest) || '1',
-      Message: safeString(Message),
-    }
-    
-    // If name changed, use originalName for lookup and Name for the new value
-    // If name didn't change, use Name for both lookup and value
-    if (nameChanged && originalNameStr) {
-      updateData.originalName = originalNameStr // For lookup
-      updateData.Name = nameStr || originalNameStr // New name value
-    } else {
-      updateData.Name = nameStr || safeString(lookupName) // Use for both lookup and value
-    }
-
-    // Debug: Log the data being sent
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Update payload being sent:', JSON.stringify(updateData, null, 2))
+      id: body.id,
+      ...body
     }
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST', // Google Apps Script uses POST for all operations
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(updateData),
     })
 
-    const responseText = await response.text()
-
-    // Parse the response
-    let data
-    try {
-      data = JSON.parse(responseText)
-    } catch (parseError) {
-      // If response is not JSON, it might be an HTML error page
-      console.error('Failed to parse response as JSON:', parseError)
-      console.error('Response text:', responseText.substring(0, 500))
-      
-      if (!response.ok) {
-        return NextResponse.json(
-          { 
-            error: `Google Apps Script returned an error. Status: ${response.status}. The script may need to be updated or redeployed.`,
-            details: responseText.substring(0, 200)
-          },
-          { status: response.status || 500 }
-        )
-      }
-      
-      // If status is ok but not JSON, assume success
-      data = { status: 'ok' }
-    }
-
-    // Check if the response indicates an error
-    if (data.error) {
-      console.error('Error in response data:', data.error)
-      return NextResponse.json(
-        { error: data.error },
-        { status: 400 }
-      )
-    }
-
-    // Check response status
     if (!response.ok) {
-      const errorMessage = data.error || `Failed to update guest. Google Apps Script returned status ${response.status}`
-      return NextResponse.json(
-        { error: errorMessage },
-        { status: response.status || 500 }
-      )
+      throw new Error('Failed to update guest')
+    }
+
+    const data = await response.json()
+    
+    if (data.error) {
+      throw new Error(data.error)
     }
 
     return NextResponse.json(data, { status: 200 })
@@ -207,27 +199,26 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-// DELETE: Delete a guest (requires action field for Google Apps Script)
+// DELETE: Delete a guest
 export async function DELETE(request: NextRequest) {
   try {
     const body = await request.json()
-    const { Name } = body
 
     // Validation
-    if (!Name || typeof Name !== 'string') {
+    if (!body.id || typeof body.id !== 'string') {
       return NextResponse.json(
-        { error: 'Name is required' },
+        { error: 'Guest ID is required' },
         { status: 400 }
       )
     }
 
     const deleteData = {
       action: 'delete',
-      Name: Name.trim(),
+      id: body.id,
     }
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST', // Google Apps Script uses POST for all operations
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -239,6 +230,11 @@ export async function DELETE(request: NextRequest) {
     }
 
     const data = await response.json()
+    
+    if (data.error) {
+      throw new Error(data.error)
+    }
+    
     return NextResponse.json(data, { status: 200 })
   } catch (error) {
     console.error('Error deleting guest:', error)

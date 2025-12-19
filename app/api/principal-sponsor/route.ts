@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 
 // You'll need to replace this with your PrincipalSponsor Google Apps Script URL
-const PRINCIPAL_SPONSOR_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyv6XO2wwNy5cTommL-aoQqmQgT6jfYrg1f9J07ApvWAvYa_Gjx-f6zJuuHZDybJAtv/exec'
+const PRINCIPAL_SPONSOR_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJyZN1ZoikumNOw0-1xppY6UAmHGJB1wBDg5kPf5NKhN2g91X0JsSv3HiF78RuM4uu/exec'
 
 // PrincipalSponsor interface matching the Google Sheets structure
 export interface PrincipalSponsor {
@@ -80,20 +80,21 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json()
-    const { MalePrincipalSponsor, FemalePrincipalSponsor, originalName } = body
+    const { MalePrincipalSponsor, FemalePrincipalSponsor, originalMale, originalFemale } = body
 
     // Validation
-    if (!MalePrincipalSponsor || typeof MalePrincipalSponsor !== 'string') {
+    if (!originalMale && !originalFemale) {
       return NextResponse.json(
-        { error: 'MalePrincipalSponsor is required' },
+        { error: 'Original sponsor information is required for update' },
         { status: 400 }
       )
     }
 
     const updateData = {
       action: 'update',
-      originalName: originalName || MalePrincipalSponsor, // Use originalName for lookup, MalePrincipalSponsor for update
-      MalePrincipalSponsor: MalePrincipalSponsor.trim(),
+      originalMale: originalMale || '',
+      originalFemale: originalFemale || '',
+      MalePrincipalSponsor: MalePrincipalSponsor?.trim() || '',
       FemalePrincipalSponsor: FemalePrincipalSponsor?.trim() || '',
     }
 

@@ -1,23 +1,36 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Lock,
+  Users,
   CheckCircle,
+  XCircle,
+  Edit2,
+  Trash2,
+  Search,
   RefreshCw,
+  Plus,
   AlertCircle,
+  Bell,
+  UserCheck,
+  Crown,
+  UserPlus,
   LogOut,
   X,
 } from "lucide-react"
 import { siteConfig } from "@/content/site"
 import { DashboardSidebar } from "@/components/dashboard-sidebar"
 import { DashboardOverview } from "@/components/dashboard-overview"
-import { ImprovedGuestList, Guest } from "@/components/improved-guest-list"
-import { GuestRequests } from "@/components/guest-requests"
-import { GuestMessages } from "@/components/guest-messages"
-import { EntourageSponsors } from "@/components/entourage-sponsors"
-import { WeddingDetailsEditor } from "@/components/wedding-details-editor"
+
+interface Guest {
+  Name: string
+  Email: string
+  RSVP: string
+  Guest: string
+  Message: string
+}
 
 interface GuestRequest {
   Name: string
@@ -46,21 +59,79 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null)
   const [guests, setGuests] = useState<Guest[]>([])
   const [filteredGuests, setFilteredGuests] = useState<Guest[]>([])
+  const [searchQuery, setSearchQuery] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [showAddGuestModal, setShowAddGuestModal] = useState(false)
+  const [editingGuest, setEditingGuest] = useState<Guest | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<"dashboard" | "guests" | "requests" | "messages" | "entourage" | "details">("dashboard")
   
   // Guest Request state
   const [guestRequests, setGuestRequests] = useState<GuestRequest[]>([])
   const [filteredRequests, setFilteredRequests] = useState<GuestRequest[]>([])
+  const [searchRequestQuery, setSearchRequestQuery] = useState("")
+  const [editingRequest, setEditingRequest] = useState<GuestRequest | null>(null)
+  const [showAddToGuestListModal, setShowAddToGuestListModal] = useState(false)
+  const [requestToAdd, setRequestToAdd] = useState<GuestRequest | null>(null)
 
   // Entourage state
   const [entourage, setEntourage] = useState<Entourage[]>([])
   const [filteredEntourage, setFilteredEntourage] = useState<Entourage[]>([])
+  const [searchEntourageQuery, setSearchEntourageQuery] = useState("")
+  const [editingEntourage, setEditingEntourage] = useState<Entourage | null>(null)
+  const [showEntourageForm, setShowEntourageForm] = useState(false)
+  const [showEntourageModal, setShowEntourageModal] = useState(false)
+
+  // Shared confirm modal state
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [confirmTitle, setConfirmTitle] = useState<string>("")
+  const [confirmMessage, setConfirmMessage] = useState<string>("")
+  const confirmActionRef = useRef<null | (() => Promise<void> | void)>(null)
 
   // PrincipalSponsor state
   const [principalSponsors, setPrincipalSponsors] = useState<PrincipalSponsor[]>([])
   const [filteredPrincipalSponsors, setFilteredPrincipalSponsors] = useState<PrincipalSponsor[]>([])
+  const [searchPrincipalSponsorQuery, setSearchPrincipalSponsorQuery] = useState("")
+  const [editingPrincipalSponsor, setEditingPrincipalSponsor] = useState<PrincipalSponsor | null>(null)
+  const [showPrincipalSponsorForm, setShowPrincipalSponsorForm] = useState(false)
+  const [showPrincipalSponsorModal, setShowPrincipalSponsorModal] = useState(false)
+
+  // Form state
+  const [formData, setFormData] = useState({
+    Name: "",
+    Email: "",
+    RSVP: "",
+    Guest: "",
+    Message: "",
+  })
+  
+  // Edit modal state
+  const [editModalOpen, setEditModalOpen] = useState(false)
+
+  // Request form state
+  const [requestFormData, setRequestFormData] = useState({
+    Name: "",
+    Email: "",
+    Phone: "",
+    RSVP: "",
+    Guest: "",
+    Message: "",
+  })
+
+  // Entourage form state
+  const [entourageFormData, setEntourageFormData] = useState({
+    Name: "",
+    RoleCategory: "",
+    RoleTitle: "",
+    Email: "",
+  })
+
+  // PrincipalSponsor form state
+  const [principalSponsorFormData, setPrincipalSponsorFormData] = useState({
+    MalePrincipalSponsor: "",
+    FemalePrincipalSponsor: "",
+  })
 
   // Password - you can change this!
   const DASHBOARD_PASSWORD = "2025" // Change this to your preferred password
@@ -77,6 +148,72 @@ export default function DashboardPage() {
     }
   }, [])
 
+  // Filter guests based on search
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredGuests(guests)
+      return
+    }
+
+    const query = searchQuery.toLowerCase()
+    const filtered = guests.filter((guest) =>
+      guest.Name.toLowerCase().includes(query) ||
+      (guest.Email && guest.Email.toLowerCase().includes(query))
+    )
+
+    setFilteredGuests(filtered)
+  }, [searchQuery, guests])
+
+  // Filter guest requests based on search
+  useEffect(() => {
+    if (!searchRequestQuery.trim()) {
+      setFilteredRequests(guestRequests)
+      return
+    }
+
+    const query = searchRequestQuery.toLowerCase()
+    const filtered = guestRequests.filter((request) =>
+      request.Name.toLowerCase().includes(query) ||
+      (request.Email && request.Email.toLowerCase().includes(query))
+    )
+
+    setFilteredRequests(filtered)
+  }, [searchRequestQuery, guestRequests])
+
+  // Filter entourage based on search
+  useEffect(() => {
+    if (!searchEntourageQuery.trim()) {
+      setFilteredEntourage(entourage)
+      return
+    }
+
+    const query = searchEntourageQuery.toLowerCase()
+    const filtered = entourage.filter((member) =>
+      member.Name.toLowerCase().includes(query) ||
+      member.RoleTitle.toLowerCase().includes(query) ||
+      member.RoleCategory.toLowerCase().includes(query) ||
+      (member.Email && member.Email.toLowerCase().includes(query))
+    )
+
+    setFilteredEntourage(filtered)
+  }, [searchEntourageQuery, entourage])
+
+  // Filter principal sponsors based on search
+  useEffect(() => {
+    if (!searchPrincipalSponsorQuery.trim()) {
+      setFilteredPrincipalSponsors(principalSponsors)
+      return
+    }
+
+    const query = searchPrincipalSponsorQuery.toLowerCase()
+    const filtered = principalSponsors.filter((sponsor) =>
+      sponsor.MalePrincipalSponsor.toLowerCase().includes(query) ||
+      sponsor.FemalePrincipalSponsor.toLowerCase().includes(query)
+    )
+
+    setFilteredPrincipalSponsors(filtered)
+  }, [searchPrincipalSponsorQuery, principalSponsors])
+
   const fetchGuests = async () => {
     setIsLoading(true)
     try {
@@ -86,13 +223,14 @@ export default function DashboardPage() {
       }
       const data = await response.json()
       
-      // Handle error response
-      if (data.error) {
-        throw new Error(data.error)
-      }
+      // Ensure Guest field exists for all guests
+      const normalizedGuests = Array.isArray(data) ? data.map((guest: Guest) => ({
+        ...guest,
+        Guest: guest.Guest || '1', // Default to 1 if missing
+      })) : []
       
-      setGuests(Array.isArray(data) ? data : [])
-      setFilteredGuests(Array.isArray(data) ? data : [])
+      setGuests(normalizedGuests)
+      setFilteredGuests(normalizedGuests)
     } catch (error) {
       console.error("Error fetching guests:", error)
       setError("Failed to load guest list")
@@ -131,7 +269,7 @@ export default function DashboardPage() {
 
   const fetchPrincipalSponsors = async () => {
     try {
-      const response = await fetch("/api/principal-sponsor")
+      const response = await fetch("/api/principal-sponsors")
       if (!response.ok) {
         throw new Error("Failed to fetch principal sponsors")
       }
@@ -174,189 +312,14 @@ export default function DashboardPage() {
     fetchPrincipalSponsors()
   }
 
-  const handleApproveRequest = async (request: GuestRequest) => {
-    if (!confirm(`Add ${request.Name} to the guest list?`)) {
-      return
-    }
-
-    setIsLoading(true)
-    setError(null)
-    setSuccessMessage(null)
-
-    try {
-      // Add to guest list with new format
-      const addResponse = await fetch("/api/guests", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: request.Name,
-          role: "Guest", // Default role for requests
-          email: request.Email,
-          contact: request.Phone || "",
-          message: request.Message,
-          allowedGuests: parseInt(request.Guest) || 1,
-          companions: [],
-          tableNumber: "",
-          isVip: false,
-          status: request.RSVP === "Yes" ? "confirmed" : "pending",
-          addedBy: "Request",
-        }),
-      })
-
-      if (!addResponse.ok) {
-        throw new Error("Failed to add to guest list")
-      }
-
-      // Delete from requests
-      const deleteResponse = await fetch("/api/guest-requests", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ Name: request.Name }),
-      })
-
-      if (!deleteResponse.ok) {
-        throw new Error("Failed to remove from requests")
-      }
-
-      setSuccessMessage(`${request.Name} added to guest list!`)
-      setTimeout(() => setSuccessMessage(null), 3000)
-      await fetchGuests()
-      await fetchGuestRequests()
-    } catch (error) {
-      console.error("Error approving request:", error)
-      setError("Failed to approve request")
-      setTimeout(() => setError(null), 3000)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-  
-  // New handlers for the improved guest list
-  const handleAddGuest = async (guestData: Omit<Guest, 'id'>) => {
-    setIsLoading(true)
-    setError(null)
-    setSuccessMessage(null)
-
-    try {
-      const response = await fetch("/api/guests", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(guestData),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to add guest")
-      }
-
-      const data = await response.json()
-      
-      if (data.error) {
-        throw new Error(data.error)
-      }
-
-      setSuccessMessage(`✓ ${guestData.name} added successfully!`)
-      setTimeout(() => setSuccessMessage(null), 3000)
-      await fetchGuests()
-    } catch (error: any) {
-      console.error("Error adding guest:", error)
-      setError(`Failed to add guest: ${error.message}`)
-      setTimeout(() => setError(null), 5000)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleUpdateGuest = async (guest: Guest) => {
-    setIsLoading(true)
-    setError(null)
-    setSuccessMessage(null)
-
-    try {
-      const response = await fetch("/api/guests", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(guest),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to update guest")
-      }
-
-      const data = await response.json()
-      
-      if (data.error) {
-        throw new Error(data.error)
-      }
-
-      setSuccessMessage(`✓ ${guest.name} updated successfully!`)
-      setTimeout(() => setSuccessMessage(null), 3000)
-      await fetchGuests()
-    } catch (error: any) {
-      console.error("Error updating guest:", error)
-      setError(`Failed to update guest: ${error.message}`)
-      setTimeout(() => setError(null), 5000)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleDeleteGuest = async (id: string) => {
-    const guestToDelete = guests.find(g => g.id === id)
-    
-    if (!confirm(`Are you sure you want to delete ${guestToDelete?.name || 'this guest'}?`)) {
-      return
-    }
-
-    setIsLoading(true)
-    setError(null)
-    setSuccessMessage(null)
-
-    try {
-      const response = await fetch("/api/guests", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to delete guest")
-      }
-
-      const data = await response.json()
-      
-      if (data.error) {
-        throw new Error(data.error)
-      }
-
-      setSuccessMessage(`✓ Guest deleted successfully!`)
-      setTimeout(() => setSuccessMessage(null), 3000)
-      await fetchGuests()
-    } catch (error: any) {
-      console.error("Error deleting guest:", error)
-      setError(`Failed to delete guest: ${error.message}`)
-      setTimeout(() => setError(null), 5000)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   const getRSVPStats = () => {
-    const attending = guests.filter((g) => g.status === "confirmed").length
-    const notAttending = guests.filter((g) => g.status === "declined").length
-    const pending = guests.filter((g) => g.status === "pending" || !g.status).length
-    // Calculate total guests by summing allowedGuests
+    const attending = guests.filter((g) => g.RSVP === "Yes").length
+    const notAttending = guests.filter((g) => g.RSVP === "No").length
+    const pending = guests.filter((g) => !g.RSVP || g.RSVP.trim() === "").length
+    // Calculate total guests by summing the Guest column (number of guests per entry)
     const totalGuests = guests.reduce((sum, guest) => {
-      return sum + (guest.allowedGuests || 1)
+      const guestCount = parseInt(guest.Guest) || 1 // Default to 1 if empty or invalid
+      return sum + guestCount
     }, 0)
     return { attending, notAttending, pending, total: guests.length, totalGuests }
   }
@@ -364,7 +327,7 @@ export default function DashboardPage() {
   const stats = getRSVPStats()
 
   // Count messages (guests with messages)
-  const messageCount = guests.filter(g => g.message && g.message.trim()).length
+  const messageCount = guests.filter(g => g.Message && g.Message.trim()).length
 
   // Login Screen
   if (!isAuthenticated) {
@@ -502,53 +465,57 @@ export default function DashboardPage() {
                 confirmedPax: stats.totalGuests,
                 pendingRSVP: stats.pending,
                 joinRequests: guestRequests.length,
-                attending: stats.attending,
-                notAttending: stats.notAttending,
-                entourage: entourage.length,
-                principalSponsors: principalSponsors.length,
               }}
             />
           )}
 
           {activeTab === "guests" && (
             <div>
-              <h2 className="text-2xl font-bold text-[#111827] mb-6">Guest Management</h2>
+              <h2 className="text-2xl font-bold text-[#111827] mb-6">Guest List Management</h2>
               <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6">
-                <ImprovedGuestList
-                  guests={filteredGuests}
-                  onAddGuest={handleAddGuest}
-                  onUpdateGuest={handleUpdateGuest}
-                  onDeleteGuest={handleDeleteGuest}
-                />
+                <p className="text-[#6B7280]">Guest list management interface will be displayed here.</p>
+                <p className="text-sm text-[#9CA3AF] mt-2">Total Guests: {stats.total} | Confirmed: {stats.attending} | Pending: {stats.pending}</p>
               </div>
             </div>
           )}
 
           {activeTab === "requests" && (
-            <GuestRequests
-              requests={filteredRequests}
-              onRefresh={fetchGuestRequests}
-              onApproveRequest={handleApproveRequest}
-              isLoading={isLoading}
-            />
+            <div>
+              <h2 className="text-2xl font-bold text-[#111827] mb-6">Join Requests</h2>
+              <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6">
+                <p className="text-[#6B7280]">Guest join requests will be displayed here.</p>
+                <p className="text-sm text-[#9CA3AF] mt-2">Total Requests: {guestRequests.length}</p>
+              </div>
+            </div>
           )}
 
           {activeTab === "messages" && (
-            <GuestMessages guests={guests} />
+            <div>
+              <h2 className="text-2xl font-bold text-[#111827] mb-6">Guest Messages</h2>
+              <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6">
+                <p className="text-[#6B7280]">Guest messages will be displayed here.</p>
+                <p className="text-sm text-[#9CA3AF] mt-2">Total Messages: {messageCount}</p>
+              </div>
+            </div>
           )}
 
           {activeTab === "entourage" && (
-            <EntourageSponsors
-              entourage={filteredEntourage}
-              principalSponsors={filteredPrincipalSponsors}
-              onRefreshEntourage={fetchEntourage}
-              onRefreshSponsors={fetchPrincipalSponsors}
-              isLoading={isLoading}
-            />
+            <div>
+              <h2 className="text-2xl font-bold text-[#111827] mb-6">Entourage & Sponsors</h2>
+              <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6">
+                <p className="text-[#6B7280]">Entourage and principal sponsors management will be displayed here.</p>
+                <p className="text-sm text-[#9CA3AF] mt-2">Entourage: {entourage.length} | Principal Sponsors: {principalSponsors.length}</p>
+              </div>
+            </div>
           )}
 
           {activeTab === "details" && (
-            <WeddingDetailsEditor />
+            <div>
+              <h2 className="text-2xl font-bold text-[#111827] mb-6">Wedding Details</h2>
+              <div className="bg-white rounded-xl shadow-sm border border-[#E5E7EB] p-6">
+                <p className="text-[#6B7280]">Wedding details and configuration will be displayed here.</p>
+              </div>
+            </div>
           )}
         </div>
       </div>

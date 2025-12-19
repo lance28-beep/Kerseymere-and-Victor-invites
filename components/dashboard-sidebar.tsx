@@ -1,0 +1,132 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import {
+  Users,
+  Bell,
+  MessageSquare,
+  Crown,
+  FileText,
+  LayoutDashboard,
+  RefreshCw,
+  ExternalLink,
+  UserPlus,
+} from "lucide-react"
+import { cn } from "@/lib/utils"
+
+interface DashboardSidebarProps {
+  activeTab: "dashboard" | "guests" | "requests" | "messages" | "entourage" | "details"
+  onTabChange: (tab: "dashboard" | "guests" | "requests" | "messages" | "entourage" | "details") => void
+  guestRequestCount: number
+  messageCount: number
+  onSyncSpreadsheet?: () => void
+}
+
+export function DashboardSidebar({
+  activeTab,
+  onTabChange,
+  guestRequestCount,
+  messageCount,
+  onSyncSpreadsheet,
+}: DashboardSidebarProps) {
+  const navItems = [
+    {
+      id: "dashboard" as const,
+      label: "Dashboard",
+      icon: LayoutDashboard,
+      badge: null,
+    },
+    {
+      id: "guests" as const,
+      label: "Guest List",
+      icon: Users,
+      badge: null,
+    },
+    {
+      id: "requests" as const,
+      label: "Join Requests",
+      icon: UserPlus,
+      badge: guestRequestCount,
+    },
+    {
+      id: "messages" as const,
+      label: "Guest Messages",
+      icon: MessageSquare,
+      badge: messageCount,
+    },
+    {
+      id: "entourage" as const,
+      label: "Entourage & Sponsors",
+      icon: Crown,
+      badge: null,
+    },
+    {
+      id: "details" as const,
+      label: "Wedding Details",
+      icon: FileText,
+      badge: null,
+    },
+  ]
+
+  return (
+    <div className="w-64 bg-white border-r border-[#E5E7EB] h-screen sticky top-0 flex flex-col">
+      {/* Logo/Header */}
+      <div className="p-6 border-b border-[#E5E7EB]">
+        <div className="flex items-center gap-2 mb-2">
+          <div className="w-8 h-8 bg-[#A67C52] rounded-lg flex items-center justify-center">
+            <span className="text-white font-serif text-lg">♥</span>
+          </div>
+          <span className="font-serif text-lg font-bold text-[#6B4423]">H & K</span>
+        </div>
+        <p className="text-xs text-[#6B7280] uppercase tracking-wide">Admin Panel</p>
+      </div>
+
+      {/* Navigation Items */}
+      <nav className="flex-1 p-4 space-y-2">
+        {navItems.map((item) => {
+          const Icon = item.icon
+          const isActive = activeTab === item.id
+
+          return (
+            <button
+              key={item.id}
+              onClick={() => onTabChange(item.id)}
+              className={cn(
+                "w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 group relative",
+                isActive
+                  ? "bg-[#FFF8F0] text-[#6B4423] shadow-sm"
+                  : "text-[#6B7280] hover:bg-[#F9FAFB] hover:text-[#6B4423]"
+              )}
+            >
+              <Icon className={cn("h-5 w-5 transition-colors", isActive ? "text-[#A67C52]" : "text-[#9CA3AF] group-hover:text-[#A67C52]")} />
+              <span className="flex-1 text-left">{item.label}</span>
+              {item.badge !== null && item.badge > 0 && (
+                <span className={cn(
+                  "px-2 py-0.5 text-xs font-bold rounded-full min-w-[20px] text-center",
+                  item.id === "requests" ? "bg-[#EDE9FE] text-[#6B21A8]" : "bg-[#FEF3C7] text-[#92400E]"
+                )}>
+                  {item.badge > 99 ? "99+" : item.badge}
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </nav>
+
+      {/* Sync Button */}
+      <div className="p-4 border-t border-[#E5E7EB]">
+        <Button
+          onClick={onSyncSpreadsheet}
+          variant="outline"
+          size="sm"
+          className="w-full justify-start gap-2 text-[#6B7280] hover:text-[#6B4423] hover:bg-[#F9FAFB] border-[#E5E7EB]"
+        >
+          <RefreshCw className="h-4 w-4" />
+          <span>Sync Spreadsheet</span>
+          <ExternalLink className="h-3 w-3 ml-auto" />
+        </Button>
+      </div>
+    </div>
+  )
+}
+
