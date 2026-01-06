@@ -42,7 +42,7 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
             <CardContent className="p-2.5 sm:p-3 md:p-4 lg:p-5">
               <div className="flex justify-between items-start mb-2 sm:mb-3 md:mb-4">
                 <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
-                  <Skeleton className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#187153]/35 via-[#327B72]/30 to-[#187153]/30" />
+                  <Skeleton className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-black/30 via-black/20 to-black/30" />
                   <div className="space-y-1.5 sm:space-y-2">
                     <Skeleton className="h-3 w-20 sm:w-24 md:w-32 bg-white/30" />
                     <Skeleton className="h-2.5 w-16 sm:w-20 md:w-24 bg-white/20" />
@@ -53,7 +53,7 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
                   <Skeleton className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-white/15" />
                 </div>
               </div>
-              <Skeleton className="h-12 sm:h-14 md:h-16 w-full bg-gradient-to-r from-[#187153]/14 via-[#327B72]/10 to-[#187153]/16 rounded-lg" />
+              <Skeleton className="h-12 sm:h-14 md:h-16 w-full bg-gradient-to-r from-black/15 via-black/10 to-black/15 rounded-lg" />
             </CardContent>
           </Card>
         ))}
@@ -65,8 +65,8 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
     return (
       <div className="text-center py-6 sm:py-10 md:py-14 lg:py-16 xl:py-20 px-2 sm:px-4">
         <div className="relative inline-block mb-4 sm:mb-5 md:mb-6 lg:mb-8">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#187153]/45 to-[#327B72]/30 rounded-full blur-xl scale-150 animate-pulse-slow" />
-          <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 bg-gradient-to-br from-[#187153] via-[#327B72] to-[#187153] rounded-full flex items-center justify-center mx-auto shadow-lg">
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/30 to-black/40 rounded-full blur-xl scale-150 animate-pulse-slow" />
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 bg-black rounded-full flex items-center justify-center mx-auto shadow-lg border-2 border-white/20">
             <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 lg:h-10 lg:w-10 text-white" />
           </div>
           {/* Outer decorative rings */}
@@ -127,7 +127,7 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
             <div className="flex justify-between items-start mb-1.5 sm:mb-2 md:mb-2.5">
               <div className="flex items-center space-x-1.5 sm:space-x-2 md:space-x-2.5">
                 <div className="relative">
-                  <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 bg-[#187153] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg ring-2 ring-white/70">
+                  <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 bg-black rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg ring-2 ring-white/70 border border-white/20">
                     <span className="text-white font-lora text-xs sm:text-sm md:text-base font-semibold drop-shadow-sm">
                       {msg.name
                         .split(" ")
@@ -137,7 +137,7 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
                     </span>
                   </div>
                   {/* Subtle avatar glow */}
-                  <div className="absolute -inset-1 rounded-full bg-[#187153]/30 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                  <div className="absolute -inset-1 rounded-full bg-black/40 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-1 sm:gap-1.5">

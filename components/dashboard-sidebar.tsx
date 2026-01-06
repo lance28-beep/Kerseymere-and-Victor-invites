@@ -112,7 +112,7 @@ export function DashboardSidebar({
       {/* Sync Button */}
       <div className="p-4 border-t border-[#E5E7EB]">
         <a
-          href="https://docs.google.com/spreadsheets/d/1DVXAphhkT41HR1bL3Ed2hgI1iqwYeGcOkcbMBj0q6Fw/edit?usp=sharing"
+          href="https://docs.google.com/spreadsheets/d/1FCtzCbEA4JXBUa_D9SkDWd2XHV6StSBsFuP2zpb04tQ/edit?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-[#6B7280] hover:text-[#6B4423] hover:bg-[#F9FAFB] border border-[#E5E7EB] transition-all duration-200 justify-start"

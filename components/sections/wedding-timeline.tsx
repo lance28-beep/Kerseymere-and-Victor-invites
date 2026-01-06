@@ -32,6 +32,43 @@ interface TimelineEvent {
   imageSrc?: string
 }
 
+/**
+ * Calculate time by adding hours and minutes to the ceremony time
+ * @param baseTime - Base time string (e.g., "2:00 PM")
+ * @param hours - Hours to add
+ * @param minutes - Minutes to add (default: 0)
+ * @returns Formatted time string (e.g., "3:30 PM")
+ */
+function calculateTime(baseTime: string, hours: number, minutes: number = 0): string {
+  // Parse the base time (e.g., "2:00 PM")
+  const timeMatch = baseTime.match(/(\d+):(\d+)\s*(AM|PM)/i)
+  if (!timeMatch) return baseTime
+
+  let hour = parseInt(timeMatch[1], 10)
+  const minute = parseInt(timeMatch[2], 10)
+  const period = timeMatch[3].toUpperCase()
+
+  // Convert to 24-hour format for calculation
+  if (period === "PM" && hour !== 12) hour += 12
+  if (period === "AM" && hour === 12) hour = 0
+
+  // Add hours and minutes
+  const totalMinutes = hour * 60 + minute + hours * 60 + minutes
+  let newHour = Math.floor(totalMinutes / 60) % 24
+  const newMinute = totalMinutes % 60
+
+  // Convert back to 12-hour format
+  let newPeriod = "AM"
+  if (newHour >= 12) {
+    newPeriod = "PM"
+    if (newHour > 12) newHour -= 12
+  }
+  if (newHour === 0) newHour = 12
+
+  // Format with leading zero for minutes
+  return `${newHour}:${newMinute.toString().padStart(2, "0")} ${newPeriod}`
+}
+
 const timelineEvents: TimelineEvent[] = [
   {
     time: guestsTime,
@@ -50,7 +87,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/WeddingCeremony.png",
   },
   {
-    time: "3:30 PM",
+    time: calculateTime(ceremonyTime, 1, 30), // 1.5 hours after ceremony
     title: "Photo Session",
     description: "Capture beautiful moments with the newlyweds and wedding party.",
     location: ceremonyVenue,
@@ -58,7 +95,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/PhotoSession.png",
   },
   {
-    time: "4:00 PM",
+    time: calculateTime(ceremonyTime, 2, 0), // 2 hours after ceremony
     title: "Cocktail Hour",
     description: "Enjoy refreshments and light snacks as we transition to the reception.",
     location: receptionVenue,
@@ -66,7 +103,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/CockTailHour.png",
   },
   {
-    time: "4:30 PM",
+    time: calculateTime(ceremonyTime, 2, 30), // 2.5 hours after ceremony
     title: "Reception Welcome",
     description: "Grand entrance and welcome to the reception celebration.",
     location: receptionVenue,
@@ -74,7 +111,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/reception welcom.png",
   },
   {
-    time: "5:00 PM",
+    time: calculateTime(ceremonyTime, 3, 0), // 3 hours after ceremony
     title: "Dinner Service",
     description: "A delicious meal prepared with love for our cherished guests.",
     location: receptionVenue,
@@ -82,7 +119,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/DinnerService.png",
   },
   {
-    time: "6:30 PM",
+    time: calculateTime(ceremonyTime, 4, 30), // 4.5 hours after ceremony
     title: "Cake Cutting",
     description: "Join us for the traditional cake cutting ceremony.",
     location: receptionVenue,
@@ -90,7 +127,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/cakecutting.png",
   },
   {
-    time: "7:00 PM",
+    time: calculateTime(ceremonyTime, 5, 0), // 5 hours after ceremony
     title: "Dancing & Celebration",
     description: `Watch ${brideNickname} & ${groomNickname} share their first dance as husband and wife, then join us as we celebrate and dance the night away together!`,
     location: receptionVenue,
@@ -98,7 +135,7 @@ const timelineEvents: TimelineEvent[] = [
     imageSrc: "/weddingtimeline/dance.png",
   },
   {
-    time: "8:30 PM",
+    time: calculateTime(ceremonyTime, 6, 30), // 6.5 hours after ceremony
     title: "Send-off",
     description: `A warm send-off for ${brideNickname} & ${groomNickname} as they begin their new chapter together.`,
     location: receptionVenue,

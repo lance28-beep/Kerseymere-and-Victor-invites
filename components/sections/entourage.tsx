@@ -133,9 +133,9 @@ export function Entourage() {
     const textAlign =
       align === "right" ? "text-right" : align === "left" ? "text-left" : "text-center"
     return (
-       <h3
-         className={`relative ${cormorant.className} text-xs sm:text-sm md:text-base lg:text-lg font-extrabold uppercase text-[#111814] mb-2 sm:mb-2.5 md:mb-3 tracking-[0.14em] sm:tracking-[0.18em] ${textAlign} ${className} transition-all duration-300 whitespace-nowrap`}
-       >
+      <h3
+        className={`relative ${cormorant.className} text-xs sm:text-sm md:text-base lg:text-lg font-extrabold uppercase text-[#1a1a1a] mb-2 sm:mb-2.5 md:mb-3 tracking-[0.14em] sm:tracking-[0.18em] ${textAlign} ${className} transition-all duration-300 whitespace-nowrap`}
+      >
         {children}
       </h3>
     )
@@ -160,16 +160,16 @@ export function Entourage() {
         className={`relative flex flex-col ${containerAlign} justify-center py-1 sm:py-1.5 md:py-2 leading-snug sm:leading-relaxed group/item transition-all duration-300 hover:scale-[1.02] sm:hover:scale-[1.03]`}
       >
         {/* Hover highlight effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#327B72]/35 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 rounded-md" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 rounded-md" />
 
         <p
-          className={`relative text-[#243127] text-[11px] sm:text-[13px] md:text-sm lg:text-base font-semibold ${textAlign} group-hover/item:text-[#1A231C] transition-all duration-300`}
+          className={`relative text-[#1a1a1a] text-[11px] sm:text-[13px] md:text-sm lg:text-base font-semibold ${textAlign} group-hover/item:text-[#000000] transition-all duration-300`}
         >
           {member.Name}
         </p>
         {showRole && member.RoleTitle && (
           <p
-            className={`relative text-[#556457] text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs font-medium mt-0.5 leading-tight sm:leading-snug ${textAlign} tracking-wide uppercase group-hover/item:text-[#37413A] transition-colors duration-300`}
+            className={`relative text-[#4a4a4a] text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs font-medium mt-0.5 leading-tight sm:leading-snug ${textAlign} tracking-wide uppercase group-hover/item:text-[#2a2a2a] transition-colors duration-300`}
           >
             {member.RoleTitle}
           </p>
@@ -224,15 +224,28 @@ export function Entourage() {
     <section
       ref={sectionRef}
       id="entourage"
-      className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-[#187153]"
+      className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-gradient-to-b from-gray-900 via-black to-gray-900"
     >
+      {/* Background image with dark overlay */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Background image */}
+        <img
+          src="/Details/newBackground.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+        />
+        {/* Premium dark overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+      </div>
 
       {/* Section Header */}
       <div className={`relative z-30 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
         {/* Small label */}
         <p
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-white mb-2`}
-          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}
+          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.75)" }}
         >
           Those who stand with {siteConfig.couple.brideNickname} &amp; {siteConfig.couple.groomNickname}
         </p>
@@ -244,11 +257,11 @@ export function Entourage() {
           Wedding Entourage
         </h2>
 
-        {/* Simple divider */}
+        {/* Simple divider with gold accent */}
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-[#327B72]/80 to-transparent" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/80" />
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-l from-transparent via-[#327B72]/80 to-transparent" />
+          <div className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" style={{ boxShadow: "0 0 10px rgba(212,175,55,0.6)" }} />
+          <div className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-l from-transparent via-white/40 to-transparent" />
         </div>
       </div>
 
@@ -258,8 +271,8 @@ export function Entourage() {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        {/* Card with green theme matching gallery */}
-        <div className="relative bg-[#F4F4F4]/95 backdrop-blur-md rounded-xl sm:rounded-2xl overflow-hidden border border-[#327B72]/60 shadow-[0_20px_60px_rgba(24,113,83,0.35)] transition-all duration-500 group">
+        {/* Card with white theme matching gallery */}
+        <div className="relative bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl overflow-hidden border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all duration-500 group">
           {/* Card content */}
           <div className="relative p-3 sm:p-6 md:p-8 z-10">
             {isLoading ? (
@@ -303,13 +316,13 @@ export function Entourage() {
                       {categoryIndex > 0 && (
                         <div className="flex justify-center py-2 sm:py-3 md:py-4 mb-3 sm:mb-4 md:mb-6">
                           <div className="flex items-center gap-1.5 sm:gap-2 w-full max-w-md">
-                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
                             <div className="flex items-center gap-1 sm:gap-1.5">
-                              <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white/60 rounded-full" />
-                              <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full" />
-                              <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white/60 rounded-full" />
+                              <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#D4AF37]/60 rounded-full" />
+                              <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+                              <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#D4AF37]/60 rounded-full" />
                             </div>
-                            <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/60 to-transparent"></div>
+                            <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/40 to-transparent"></div>
                           </div>
                         </div>
                       )}
@@ -351,13 +364,13 @@ export function Entourage() {
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-3 sm:py-4 md:py-5 mb-5 sm:mb-6 md:mb-8">
                             <div className="flex items-center gap-2 w-full max-w-md">
-                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
                               <div className="flex items-center gap-1.5">
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
-                                <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
+                                <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
                               </div>
-                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/40 to-transparent"></div>
                             </div>
                           </div>
                         )}
@@ -402,13 +415,13 @@ export function Entourage() {
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-3 sm:py-4 md:py-5 mb-5 sm:mb-6 md:mb-8">
                             <div className="flex items-center gap-2 w-full max-w-md">
-                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
                               <div className="flex items-center gap-1.5">
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
-                                <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
+                                <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
                               </div>
-                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/40 to-transparent"></div>
                             </div>
                           </div>
                         )}
@@ -453,13 +466,13 @@ export function Entourage() {
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-3 sm:py-4 md:py-5 mb-5 sm:mb-6 md:mb-8">
                             <div className="flex items-center gap-2 w-full max-w-md">
-                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
                               <div className="flex items-center gap-1.5">
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
-                                <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
+                                <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
                               </div>
-                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/40 to-transparent"></div>
                             </div>
                           </div>
                         )}
@@ -504,13 +517,13 @@ export function Entourage() {
                         {categoryIndex > 0 && (
                           <div className="flex justify-center py-3 sm:py-4 md:py-5 mb-5 sm:mb-6 md:mb-8">
                             <div className="flex items-center gap-2 w-full max-w-md">
-                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent"></div>
                               <div className="flex items-center gap-1.5">
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
-                                <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                                <div className="w-1 h-1 bg-white/60 rounded-full" />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
+                                <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+                                <div className="w-1 h-1 bg-[#D4AF37]/60 rounded-full" />
                               </div>
-                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-white/60 to-transparent"></div>
+                              <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/40 to-transparent"></div>
                             </div>
                           </div>
                         )}
@@ -549,9 +562,9 @@ export function Entourage() {
                     {categoryIndex > 0 && (
                       <div className="flex justify-center py-3 sm:py-4 md:py-5 mb-5 sm:mb-6 md:mb-8">
                         <div className="flex items-center gap-2 w-full max-w-md">
-                          <div className="h-[1.5px] flex-1 bg-gradient-to-r from-transparent via-[#327B72]/50 to-[#327B72]"></div>
-                          <div className="w-1.5 h-1.5 bg-[#327B72] rounded-full"></div>
-                          <div className="h-[1.5px] flex-1 bg-gradient-to-l from-transparent via-[#327B72]/50 to-[#327B72]"></div>
+                          <div className="h-[1.5px] flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-[#D4AF37]"></div>
+                          <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }}></div>
+                          <div className="h-[1.5px] flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/50 to-[#D4AF37]"></div>
                         </div>
                       </div>
                     )}
@@ -626,13 +639,13 @@ export function Entourage() {
                   <div key={category}>
                     <div className="flex justify-center py-3 sm:py-4 md:py-5 mb-5 sm:mb-6 md:mb-8">
                       <div className="flex items-center gap-2 w-full max-w-md">
-                        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#327B72]/50 to-[#327B72]/70"></div>
+                        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-[#D4AF37]/70"></div>
                         <div className="flex items-center gap-1.5">
-                          <div className="w-1 h-1 bg-[#327B72]/70 rounded-full" />
-                          <div className="w-1.5 h-1.5 bg-[#187153]/90 rounded-full" />
-                          <div className="w-1 h-1 bg-[#327B72]/70 rounded-full" />
+                          <div className="w-1 h-1 bg-[#D4AF37]/70 rounded-full" />
+                          <div className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+                          <div className="w-1 h-1 bg-[#D4AF37]/70 rounded-full" />
                         </div>
-                        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#327B72]/50 to-[#327B72]/70"></div>
+                        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-[#D4AF37]/50 to-[#D4AF37]/70"></div>
                       </div>
                     </div>
                     <TwoColumnLayout singleTitle={category} centerContent={true}>

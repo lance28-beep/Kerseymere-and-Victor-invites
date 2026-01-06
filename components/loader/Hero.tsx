@@ -61,11 +61,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpen, visible }) => {
           />
         ))}
         
-        {/* Emerald overlay */}
+        {/* Overlay */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(135deg, rgba(50, 123, 114, 0.4) 0%, rgba(24, 113, 83, 0.5) 50%, rgba(50, 123, 114, 0.4) 100%)'
+            background: `rgba(106, 19, 36, 0.5)`
           }}
         />
       </div>
@@ -79,8 +79,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpen, visible }) => {
             {/* Monogram Image - White version */}
             <div className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 brightness-0 invert">
               <Image
-                src="/monogram/monogramnew.png"
-                alt="Nathaniel & Jasmin Monogram"
+                src="/monogram/monogram.png"
+                alt="Kersey & Victor Monogram"
                 fill
                 className="object-contain"
                 priority
@@ -116,10 +116,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpen, visible }) => {
             onClick={() => {
               onOpen();
             }}
-            className="px-10 py-4 bg-white/20 text-white font-serif text-sm tracking-[0.2em] uppercase rounded-sm border border-white/40 hover:bg-white/30"
+            className="px-10 py-4 bg-white text-black font-serif text-sm tracking-[0.2em] uppercase rounded-sm border border-black/20 hover:bg-gray-50 transition-colors"
           >
             <span
-              className="text-white"
+              className="text-black"
               style={{ fontFamily: '"Cinzel", serif', fontWeight: 500 }}
             >
               Open Invitation

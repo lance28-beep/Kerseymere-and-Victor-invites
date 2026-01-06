@@ -19,7 +19,7 @@ const windSong = WindSong({
   weight: "400",
 })
 
-const galleryHashtag = "#NathanielAndJasminWedding"
+const galleryHashtag = "#KerseyAndVictorWedding"
 
 const galleryItems = [
   { image: "/mobile-background/couple (1).jpg", text: " " },  
@@ -112,17 +112,20 @@ export function Gallery() {
   return (
     <Section
       id="gallery"
-      className="relative bg-[#187153] py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden"
+      className="relative bg-gradient-to-b from-gray-900 via-black to-gray-900 py-10 sm:py-12 md:py-16 lg:py-20 overflow-hidden"
     >
-      {/* Background image */}
+      {/* Background image with dark overlay */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Background image */}
         <img
           src="/Details/newBackground.jpg"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
         />
+        {/* Premium dark overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
       </div>
 
       {/* Header */}
@@ -143,24 +146,25 @@ export function Gallery() {
         </div>
 
         <p className={`${cormorant.className} text-xs sm:text-sm md:text-base text-white/95 font-light max-w-xl mx-auto leading-relaxed mt-3`}>
-          Beautiful frames capturing the journey of Nathaniel and Jasmin — each photograph a precious memory of laughter, love, and the moments that led us to forever.
+          Beautiful frames capturing the journey of {coupleDisplayName} — each photograph a precious memory of laughter, love, and the moments that led us to forever.
         </p>
 
         <div className="flex items-center justify-center gap-2 mt-6">
-          <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent via-[#327B72]/80 to-transparent" />
+          <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
           <motion.div
-            className="w-1.5 h-1.5 rounded-full bg-white/80"
+            className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"
             animate={{
               scale: [1, 1.3, 1],
-              opacity: [0.7, 1, 0.7],
+              opacity: [0.8, 1, 0.8],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
+            style={{ boxShadow: "0 0 10px rgba(212,175,55,0.6)" }}
           />
-          <div className="w-8 sm:w-12 h-px bg-gradient-to-l from-transparent via-[#327B72]/80 to-transparent" />
+          <div className="w-8 sm:w-12 h-px bg-gradient-to-l from-transparent via-white/40 to-transparent" />
         </div>
       </div>
 
@@ -189,8 +193,8 @@ export function Gallery() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    {/* Subtle glow on hover with emerald motif */}
-                    <div className="absolute -inset-0.5 bg-gradient-to-br from-[#327B72]/45 via-[#A98634]/28 to-[#FACBC5]/20 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
+                    {/* Subtle glow on hover */}
+                    <div className="absolute -inset-0.5 bg-gradient-to-br from-white/20 via-[#D4AF37]/15 to-white/10 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm" />
                     
                     <div className="relative aspect-[3/4] md:aspect-square overflow-hidden">
                       <img
@@ -205,8 +209,8 @@ export function Gallery() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     
-                    {/* Image counter badge with emerald motif colors */}
-                    <div className="absolute top-2 right-2 bg-[#187153]/90 backdrop-blur-sm rounded-full px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-[#327B72]/70">
+                    {/* Image counter badge */}
+                    <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white/20">
                       <span className="text-xs font-medium text-white tracking-wide">
                         {index + 1}/{galleryItems.length}
                       </span>
@@ -394,10 +398,10 @@ export function Gallery() {
           href="/gallery"
           className="group inline-flex items-center gap-2 px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm md:text-base whitespace-nowrap relative overflow-hidden border-2 backdrop-blur-sm"
           style={{
-            backgroundColor: "#FACBC5",
-            borderColor: "#E5D0CD",
-            color: "#187153",
-            boxShadow: "0 6px 26px rgba(250,203,197,0.45), 0 2px 10px rgba(250,203,197,0.6)",
+            backgroundColor: "#FFFFFF",
+            borderColor: "rgba(255,255,255,0.3)",
+            color: "#000000",
+            boxShadow: "0 10px 32px rgba(255,255,255,0.25), 0 4px 16px rgba(0,0,0,0.3)",
           }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -406,17 +410,21 @@ export function Gallery() {
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.98 }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#FACBC5";
-            e.currentTarget.style.borderColor = "#A98634";
-            e.currentTarget.style.boxShadow = "0 10px 34px rgba(250,203,197,0.55), 0 4px 14px rgba(250,203,197,0.8)";
+            e.currentTarget.style.backgroundColor = "#FFFFFF";
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)";
+            e.currentTarget.style.boxShadow = "0 12px 40px rgba(255,255,255,0.35), 0 6px 20px rgba(0,0,0,0.4)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "#FACBC5";
-            e.currentTarget.style.borderColor = "#E5D0CD";
-            e.currentTarget.style.boxShadow = "0 6px 26px rgba(250,203,197,0.45), 0 2px 10px rgba(250,203,197,0.6)";
+            e.currentTarget.style.backgroundColor = "#FFFFFF";
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+            e.currentTarget.style.boxShadow = "0 10px 32px rgba(255,255,255,0.25), 0 4px 16px rgba(0,0,0,0.3)";
           }}
         >
-          <span className="relative z-10">View Full Gallery</span>
+          {/* Premium white gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/100 via-white/95 to-white/90 opacity-100 group-hover:opacity-100 transition-opacity duration-300" />
+          {/* Subtle shimmer effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12" />
+          <span className="relative z-10 text-black" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>View Full Gallery</span>
           <motion.div
             animate={{
               x: [0, 4, 0],
@@ -427,24 +435,8 @@ export function Gallery() {
               ease: "easeInOut",
             }}
           >
-            <ChevronRight size={16} className="sm:w-5 sm:h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+            <ChevronRight size={16} className="sm:w-5 sm:h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1 text-black" />
           </motion.div>
-          <div 
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FACBC5]/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -skew-x-12 -translate-x-full group-hover:translate-x-full"
-          />
-          {/* Pulsing glow effect */}
-          <motion.div 
-            className="absolute inset-0 bg-[#FACBC5]/25 rounded-lg sm:rounded-xl blur-xl -z-10"
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
         </motion.a>
       </div>
     </Section>

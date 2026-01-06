@@ -134,16 +134,20 @@ export function BookOfGuests() {
   return (
     <div
       id="guests"
-      className="relative z-10 bg-[#187153] py-4 sm:py-8 md:py-12 lg:py-16 overflow-hidden isolate"
+      className="relative z-10 bg-gradient-to-b from-gray-900 via-black to-gray-900 py-4 sm:py-8 md:py-12 lg:py-16 overflow-hidden isolate"
     >
-      {/* Background image - matching gallery */}
+      {/* Background image with dark overlay */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Background image */}
         <img
           src="/Details/newBackground.jpg"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
         />
+        {/* Premium dark overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
       </div>
 
       {/* Section Header - More Compact */}
@@ -167,13 +171,13 @@ export function BookOfGuests() {
           See who&apos;s celebrating with us on our special day
         </p>
 
-        {/* Decorative element - Smaller */}
+        {/* Decorative element - Smaller with gold accent */}
         <div className="flex items-center justify-center gap-1 sm:gap-1.5 mt-1.5 sm:mt-2.5 md:mt-3">
-          <div className="w-6 sm:w-10 md:w-12 h-px bg-gradient-to-r from-transparent via-[#327B72]/80 to-transparent" />
-          <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#327B72]/90 rounded-full" />
+          <div className="w-6 sm:w-10 md:w-12 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#D4AF37]/90 rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
           <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white/85 rounded-full" />
-          <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#327B72]/90 rounded-full" />
-          <div className="w-6 sm:w-10 md:w-12 h-px bg-gradient-to-l from-transparent via-[#327B72]/80 to-transparent" />
+          <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-[#D4AF37]/90 rounded-full" style={{ boxShadow: "0 0 8px rgba(212,175,55,0.5)" }} />
+          <div className="w-6 sm:w-10 md:w-12 h-px bg-gradient-to-l from-transparent via-white/40 to-transparent" />
         </div>
       </div>
 
@@ -182,16 +186,16 @@ export function BookOfGuests() {
         {/* Stats card - Simplified */}
         <div className="text-center mb-2.5 sm:mb-4 md:mb-6 px-2 sm:px-4 md:px-6">
           <div className="relative max-w-3xl mx-auto">
-            <div className="relative bg-white/95 backdrop-blur-md border border-[#327B72]/40 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 shadow-md">
+            <div className="relative bg-white/95 backdrop-blur-md border border-white/30 rounded-lg sm:rounded-xl p-3 sm:p-5 md:p-6 shadow-md">
               
               {/* Refresh button */}
               <button
                 onClick={() => fetchGuests(true)}
                 disabled={isRefreshing}
-                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 p-1 sm:p-1.5 rounded-full bg-[#327B72]/10 hover:bg-[#187153]/20 transition-all duration-300 disabled:opacity-50 group z-10"
+                className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 p-1 sm:p-1.5 rounded-full bg-black/10 hover:bg-black/20 transition-all duration-300 disabled:opacity-50 group z-10"
                 title="Refresh counts"
               >
-                <RefreshCw className={`h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#187153] transition-transform ${isRefreshing ? 'animate-spin' : 'group-hover:rotate-180'} duration-500`} />
+                <RefreshCw className={`h-3 w-3 sm:h-3.5 sm:w-3.5 text-black transition-transform ${isRefreshing ? 'animate-spin' : 'group-hover:rotate-180'} duration-500`} />
               </button>
 
               {/* Main Count with inline text */}
@@ -229,13 +233,13 @@ export function BookOfGuests() {
               {confirmedGuests.map((guest) => (
                 <div
                   key={guest.id}
-                  className="relative group bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-4 md:p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-[#327B72]"
+                  className="relative group bg-white rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-4 md:p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-black/50"
                 >
                   {/* Guest Header */}
                   <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-2.5 md:mb-3">
                     {/* Avatar - Mobile Optimized */}
                     <div className="relative flex-shrink-0">
-                      <div className="w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#187153] to-[#327B72] flex items-center justify-center shadow-md ring-2 ring-white/50">
+                      <div className="w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-black via-gray-800 to-black flex items-center justify-center shadow-md ring-2 ring-white/50">
                         <span className="text-white font-semibold text-xs sm:text-base md:text-lg">
                           {getInitials(guest.name)}
                         </span>
@@ -257,7 +261,7 @@ export function BookOfGuests() {
                           {guest.name}
                         </h3>
                         {guest.role && (
-                          <p className="text-[9px] sm:text-[10px] md:text-xs text-[#187153] font-medium">
+                          <p className="text-[9px] sm:text-[10px] md:text-xs text-black/70 font-medium">
                             {guest.role}
                           </p>
                         )}
@@ -274,17 +278,17 @@ export function BookOfGuests() {
                       {/* Info Badges - Mobile Optimized */}
                       <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 md:gap-2 mb-1.5 sm:mb-2 md:mb-3">
                         {/* Guest count badge */}
-                        <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 md:px-2.5 py-0.5 sm:py-1 bg-gradient-to-r from-[#187153]/10 to-[#327B72]/10 border border-[#327B72]/30 rounded sm:rounded-md md:rounded-lg">
-                          <Users className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-[#187153]" />
-                          <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-[#187153]">
+                        <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 md:px-2.5 py-0.5 sm:py-1 bg-gradient-to-r from-black/10 to-black/10 border border-black/30 rounded sm:rounded-md md:rounded-lg">
+                          <Users className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-black" />
+                          <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-black">
                             {guest.allowedGuests} {guest.allowedGuests === 1 ? 'Guest' : 'Guests'}
                           </span>
                         </div>
 
                         {/* Table badge */}
-                        <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 md:px-2.5 py-0.5 sm:py-1 bg-gradient-to-r from-[#327B72]/15 to-[#187153]/10 border border-[#187153]/40 sm:border-2 rounded sm:rounded-md md:rounded-lg">
-                          <MapPin className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-[#187153]" />
-                          <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold sm:font-bold text-[#187153]">
+                        <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 md:px-2.5 py-0.5 sm:py-1 bg-gradient-to-r from-black/15 to-black/10 border border-black/40 sm:border-2 rounded sm:rounded-md md:rounded-lg">
+                          <MapPin className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-black" />
+                          <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold sm:font-bold text-black">
                             {guest.tableNumber && guest.tableNumber.trim() !== "" ? (
                               <>Table {guest.tableNumber}</>
                             ) : (
@@ -296,28 +300,28 @@ export function BookOfGuests() {
 
                       {/* Message - Mobile Optimized */}
                       {guest.message && guest.message.trim() !== "" && (
-                        <div className="relative mb-1.5 sm:mb-2.5 md:mb-3 p-2 sm:p-3 md:p-5 bg-gradient-to-br from-[#F8F7FC] via-white to-[#F8F7FC] rounded sm:rounded-lg md:rounded-2xl border border-[#327B72]/30 shadow-sm overflow-hidden">
+                        <div className="relative mb-1.5 sm:mb-2.5 md:mb-3 p-2 sm:p-3 md:p-5 bg-gradient-to-br from-white via-white to-white rounded sm:rounded-lg md:rounded-2xl border border-black/30 shadow-sm overflow-hidden">
                           {/* Decorative corner elements - smaller on mobile */}
                           <div className="absolute top-0 left-0 w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 opacity-[0.08]">
-                            <svg viewBox="0 0 100 100" className="text-[#187153]" fill="currentColor">
+                            <svg viewBox="0 0 100 100" className="text-black" fill="currentColor">
                               <path d="M0,0 L100,0 L0,100 Z" />
                             </svg>
                           </div>
                           <div className="absolute bottom-0 right-0 w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 opacity-[0.08]">
-                            <svg viewBox="0 0 100 100" className="text-[#327B72]" fill="currentColor">
+                            <svg viewBox="0 0 100 100" className="text-black" fill="currentColor">
                               <path d="M100,100 L0,100 L100,0 Z" />
                             </svg>
                           </div>
                           
                           {/* Opening quote - smaller on mobile */}
-                          <div className="absolute top-1 left-1 sm:top-1.5 sm:left-1.5 md:top-2 md:left-2 text-[#327B72]/25">
+                          <div className="absolute top-1 left-1 sm:top-1.5 sm:left-1.5 md:top-2 md:left-2 text-black/25">
                             <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
                             </svg>
                           </div>
                           
                           {/* Closing quote - smaller on mobile */}
-                          <div className="absolute bottom-1 right-1 sm:bottom-1.5 sm:right-1.5 md:bottom-2 md:right-2 text-[#327B72]/25">
+                          <div className="absolute bottom-1 right-1 sm:bottom-1.5 sm:right-1.5 md:bottom-2 md:right-2 text-black/25">
                             <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M18 7h-3l-2 4v6h6v-6h-3zm-8 0H7l-2 4v6h6v-6h-3z" />
                             </svg>
@@ -331,7 +335,7 @@ export function BookOfGuests() {
                           </div>
 
                           {/* Elegant border accent - smaller on mobile */}
-                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 sm:w-0.5 md:w-1 h-8 sm:h-12 md:h-16 bg-gradient-to-b from-transparent via-[#327B72] to-transparent rounded-r-full" />
+                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 sm:w-0.5 md:w-1 h-8 sm:h-12 md:h-16 bg-gradient-to-b from-transparent via-black to-transparent rounded-r-full" />
                         </div>
                       )}
 
@@ -339,12 +343,12 @@ export function BookOfGuests() {
                       {guest.companions && guest.companions.length > 0 && (
                         <div className="pt-1.5 sm:pt-2 md:pt-2.5 border-t border-gray-100">
                           <div className="flex items-center gap-1 mb-1 sm:mb-1.5">
-                            <Users className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-[#187153]" />
+                            <Users className="h-2.5 w-2.5 sm:h-3 sm:w-3 md:h-3.5 md:w-3.5 text-black" />
                             <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-gray-700">Companions</span>
                           </div>
                           <div className="flex flex-wrap gap-1 sm:gap-1.5">
                             {guest.companions.map((companion, idx) => (
-                              <div key={idx} className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 md:px-2.5 py-0.5 sm:py-1 bg-white border border-[#327B72]/30 rounded sm:rounded-md md:rounded-lg hover:border-[#187153]/50 transition-colors">
+                              <div key={idx} className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 md:px-2.5 py-0.5 sm:py-1 bg-white border border-black/30 rounded sm:rounded-md md:rounded-lg hover:border-black/50 transition-colors">
                                 <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-gray-800">{companion.name}</span>
                                 {companion.relationship && (
                                   <span className="text-[8px] sm:text-[9px] md:text-[10px] text-gray-500 bg-gray-50 px-1 sm:px-1.5 py-0.5 rounded-full">

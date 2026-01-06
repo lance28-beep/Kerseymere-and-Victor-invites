@@ -128,10 +128,13 @@ export function Hero() {
             }}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#187153]/90 via-[#327B72]/70 to-transparent z-0" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#187153]/75 z-0" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(50,123,114,0.3),transparent_55%)] mix-blend-screen" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(169,134,52,0.28),transparent_35%)] opacity-70 animate-[pulse_9s_ease-in-out_infinite]" />
+        {/* Premium mild dark overlay with gradients */}
+        <div className="absolute inset-0 bg-black/35 z-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-black/15 z-0" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/15 to-black/40 z-0" />
+        {/* Premium white gradient accents */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] via-transparent to-black/20 z-0" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.015),transparent_60%)] z-0" />
       </div>
 
       {SHOW_BUTTERFLIES && (
@@ -583,21 +586,25 @@ export function Hero() {
             <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch">
             <a
               href="#guest-list"
-              className={`${cormorant.className} group relative flex-1 sm:min-w-[200px] md:min-w-[220px] rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FACBC5]/70`}
+              className={`${cormorant.className} group relative flex-1 sm:min-w-[200px] md:min-w-[220px] rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50`}
               style={{
-                backgroundColor: "#FACBC5",
-                boxShadow: "0 10px 24px rgba(250,203,197,0.4)",
+                backgroundColor: "#FFFFFF",
+                boxShadow: "0 10px 32px rgba(255,255,255,0.25), 0 4px 16px rgba(0,0,0,0.3)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#FACBC5";
-                e.currentTarget.style.boxShadow = "0 12px 28px rgba(250,203,197,0.5)";
+                e.currentTarget.style.backgroundColor = "#FFFFFF";
+                e.currentTarget.style.boxShadow = "0 12px 40px rgba(255,255,255,0.35), 0 6px 20px rgba(0,0,0,0.4)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#FACBC5";
-                e.currentTarget.style.boxShadow = "0 10px 24px rgba(250,203,197,0.4)";
+                e.currentTarget.style.backgroundColor = "#FFFFFF";
+                e.currentTarget.style.boxShadow = "0 10px 32px rgba(255,255,255,0.25), 0 4px 16px rgba(0,0,0,0.3)";
               }}
             >
-              <span className="relative z-10 inline-flex h-full min-h-[3rem] sm:min-h-[3.25rem] w-full items-center justify-center px-6 sm:px-8 text-[0.65rem] sm:text-[0.7rem] md:text-xs uppercase tracking-[0.32em] sm:tracking-[0.36em] text-[#187153] font-semibold transition-all duration-300" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.2)" }}>
+              {/* Premium white gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-white/100 via-white/95 to-white/90 opacity-100 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Subtle shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12" />
+              <span className="relative z-10 inline-flex h-full min-h-[3rem] sm:min-h-[3.25rem] w-full items-center justify-center px-6 sm:px-8 text-[0.65rem] sm:text-[0.7rem] md:text-xs uppercase tracking-[0.32em] sm:tracking-[0.36em] text-black font-semibold transition-all duration-300" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.1)" }}>
                 Confirm Attendance
               </span>
             </a>

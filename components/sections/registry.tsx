@@ -11,15 +11,15 @@ const paymentMethods = [
     description: "Mobile payment via GCASH",
     accent: "from-[#007BFF] to-[#0056B3]",
     Icon: Smartphone,
-    qrSrc: "/QR/GCASH.png",
+    qrSrc: "/QR/Gcash.png",
   },
   {
-    id: "landbank",
-    label: "Land Bank",
-    description: "Bank transfer via Land Bank",
+    id: "bdo",
+    label: "BDO",
+    description: "Bank transfer via BDO",
     accent: "from-[#A8AF8D] to-[#5B6B3C]",
     Icon: Building2,
-    qrSrc: "/QR/LANDBANK QR.png",
+    qrSrc: "/QR/BDO.png",
   },
 ] as const
 
@@ -77,7 +77,7 @@ export function Registry() {
                     />
                   </div>
                   <p className="text-sm sm:text-base text-[#6A4F82] max-w-md">
-                    Scan the QR code to make a {paymentMethod.id === "gcash" ? "mobile payment" : "bank transfer"}.
+                    Scan the QR code to make a {paymentMethod.id === "gcash" ? "mobile payment" : paymentMethod.id === "bdo" ? "bank transfer via BDO" : "bank transfer"}.
                   </p>
                 </div>
               </div>

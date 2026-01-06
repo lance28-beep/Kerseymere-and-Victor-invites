@@ -67,10 +67,10 @@ export function Details() {
   const ceremonyMapsLink = `https://maps.google.com/?q=${encodeURIComponent(siteConfig.ceremony.location)}`
   const receptionMapsLink = `https://maps.google.com/?q=${encodeURIComponent(siteConfig.reception.location)}`
 
-  // Palettes (used only for color chips in attire card) - Emerald motif
-  const sponsorPalette = ["#6A4F82", "#B9AACB", "#A8AF8D"]
-  const guestPalette = ["#327B72", "#187153", "#A98634", "#FACBC5", "#E5D0CD"]
-  const secondaryPalette = ["#B9AACB", "#F4F4F4", "#A8AF8D", "#6A4F82", "#5B6B3C"]
+  // Palettes (used only for color chips in attire card) - Wedding motif
+  const sponsorPalette = ["#6A1324", "#8B1A2E", "#A02040"]
+  const guestPalette = ["#DEA8B6", "#BF7D8B", "#A05969", "#903749", "#7B1E30"]
+  const secondaryPalette = ["#6A1324", "#FFFFFF", "#000000", "#8B1A2E", "#4A0E1A"]
 
   const openInMaps = (link: string) => {
     window.open(link, "_blank", "noopener,noreferrer")
@@ -79,57 +79,45 @@ export function Details() {
   return (
     <Section
       id="details"
-      className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-[#187153]"
+      className="relative py-12 md:py-16 lg:py-20 overflow-hidden"
     >
-      {/* Background image - same as gallery */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <img
-          src="/Details/newBackground.jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
-        />
-      </div>
-
       {/* Header */}
       <div className="relative z-30 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4">
         {/* Small label */}
         <p
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-white mb-2`}
-          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.75)" }}
         >
           Ceremony & Reception Details
         </p>
 
         <h2
           className="style-script-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-1.5 sm:mb-3 md:mb-4"
-          style={{ textShadow: "0 4px 18px rgba(0,0,0,0.9)" }}
         >
           Details
         </h2>
 
-        <p className="text-[11px] sm:text-sm md:text-base lg:text-lg text-white/95 max-w-xl mx-auto leading-relaxed px-2">
+        <p className="text-[11px] sm:text-sm md:text-base lg:text-lg text-white max-w-xl mx-auto leading-relaxed px-2">
           Everything you need to join us as we say&nbsp;
-          <span className="font-semibold text-white">“I do.”</span>
+          <span className="font-semibold text-white">"I do."</span>
         </p>
 
-        {/* Decorative element below subtitle - matching gallery style */}
+        {/* Decorative element below subtitle - wedding motif colors */}
         <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-[#327B72]/60" />
-          <div className="w-1.5 h-1.5 bg-[#A98634]/80 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-[#FACBC5]/80 rounded-full" />
-          <div className="w-1.5 h-1.5 bg-[#327B72]/80 rounded-full" />
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-[#327B72]/60" />
+          <div className="w-8 sm:w-12 md:w-16 h-px bg-white/40" />
+          <div className="w-1.5 h-1.5 bg-[#6A1324] rounded-full" style={{ boxShadow: "0 0 8px rgba(106,19,36,0.6)" }} />
+          <div className="w-1.5 h-1.5 bg-white/80 rounded-full" />
+          <div className="w-1.5 h-1.5 bg-[#6A1324] rounded-full" style={{ boxShadow: "0 0 8px rgba(106,19,36,0.6)" }} />
+          <div className="w-8 sm:w-12 md:w-16 h-px bg-white/40" />
         </div>
       </div>
 
       {/* Ceremony & Reception Locations (separate cards) */}
       <div className="relative z-10 mb-4 sm:mb-8 max-w-6xl mx-auto px-3 sm:px-5 space-y-3 sm:space-y-4">
-        <div className="text-center text-white/90">
+        <div className="text-center text-white">
           <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase">
             Ceremony &amp; Reception Location
           </p>
-          <p className="text-sm sm:text-base md:text-lg font-semibold">
+          <p className="text-sm sm:text-base md:text-lg font-semibold text-white">
             {ceremonyLocation} • {receptionLocation}
           </p>
         </div>
@@ -144,7 +132,7 @@ export function Details() {
               date: siteConfig.ceremony.date,
               time: siteConfig.ceremony.time,
               mapLink: ceremonyMapsLink,
-              gradient: "from-[#187153] via-[#327B72] to-[#FACBC5]",
+              gradient: "from-[#6A1324] via-[#8B1A2E] to-black",
               image: "/Details/Casa Joros Mendenilla Resort Catanauan Quezon.jpg",
             },
             {
@@ -155,13 +143,13 @@ export function Details() {
               date: siteConfig.reception.date,
               time: siteConfig.reception.time,
               mapLink: receptionMapsLink,
-              gradient: "from-[#327B72] via-[#A98634] to-[#FACBC5]",
+              gradient: "from-[#6A1324] via-[#8B1A2E] to-black",
               image: "/Details/Casa Pavillion.png",
             },
           ].map((info) => (
             <div
               key={info.key}
-              className="overflow-hidden rounded-xl sm:rounded-2xl border border-[#327B72]/40 bg-gradient-to-b shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group hover:scale-[1.01]"
+              className="overflow-hidden rounded-xl sm:rounded-2xl border border-white/20 bg-gradient-to-b shadow-[0_20px_60px_rgba(0,0,0,0.6)] transition-transform duration-500 group hover:scale-[1.01]"
               style={{ backgroundImage: undefined }}
             >
               {/* Top image */}
@@ -174,7 +162,7 @@ export function Details() {
                   sizes="100vw"
                   priority
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t from-[#187153]/95 via-[#327B72]/65 to-transparent`} />
+                <div className={`absolute inset-0 bg-gradient-to-t from-[#6A1324]/90 via-[#6A1324]/60 to-transparent`} />
                 <div className="absolute inset-0 flex flex-col justify-end px-3 sm:px-6 pb-3 sm:pb-6 text-white">
                   <p className="style-script-regular text-xl sm:text-2xl md:text-3xl font-normal leading-none drop-shadow-md">
                     {info.label}
@@ -186,20 +174,20 @@ export function Details() {
               </div>
 
               {/* Details panel */}
-              <div className="bg-[#FACBC5]/95 text-[#187153] px-3 sm:px-6 py-4 sm:py-6 space-y-4 backdrop-blur-sm">
+              <div className="bg-white/95 text-black px-3 sm:px-6 py-4 sm:py-6 space-y-4 backdrop-blur-sm border-t border-[#6A1324]/20">
                 <div className="space-y-2.5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-left">
-                    <div className="rounded-md border border-[#327B72] bg-white/80 px-2.5 py-2 shadow-sm">
-                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#327B72] uppercase mb-0.5">
+                    <div className="rounded-md border border-[#6A1324]/40 bg-white/90 px-2.5 py-2 shadow-sm">
+                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#6A1324] uppercase mb-0.5">
                         Date
                       </p>
-                      <p className="text-sm sm:text-base font-bold text-[#187153]">{info.date}</p>
+                      <p className="text-sm sm:text-base font-bold text-black">{info.date}</p>
                     </div>
-                    <div className="rounded-md border border-[#327B72] bg-white/80 px-2.5 py-2 shadow-sm">
-                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#327B72] uppercase mb-0.5">
+                    <div className="rounded-md border border-[#6A1324]/40 bg-white/90 px-2.5 py-2 shadow-sm">
+                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#6A1324] uppercase mb-0.5">
                         {info.label}
                       </p>
-                      <p className="text-sm sm:text-base font-bold text-[#187153]">{info.time}</p>
+                      <p className="text-sm sm:text-base font-bold text-black">{info.time}</p>
                     </div>
                   </div>
                 </div>
@@ -207,24 +195,35 @@ export function Details() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3">
                   <button
                     onClick={() => openInMaps(info.mapLink)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg bg-[#187153] text-white py-2.5 sm:py-3 shadow-lg hover:translate-y-[-2px] hover:bg-[#327B72] transition-all text-xs sm:text-sm font-semibold"
+                    className="flex items-center justify-center gap-1.5 rounded-lg bg-white text-black py-2.5 sm:py-3 shadow-lg hover:translate-y-[-2px] hover:bg-white/95 transition-all text-xs sm:text-sm font-semibold relative overflow-hidden group border border-[#6A1324]/20"
+                    style={{
+                      boxShadow: "0 6px 24px rgba(255,255,255,0.2), 0 2px 8px rgba(0,0,0,0.2)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = "0 8px 32px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.3)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = "0 6px 24px rgba(255,255,255,0.2), 0 2px 8px rgba(0,0,0,0.2)";
+                    }}
                   >
-                    <Navigation className="w-4 h-4" />
-                    Get Directions
+                    {/* Premium white gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/100 via-white/95 to-white/90 opacity-100 group-hover:opacity-100 transition-opacity duration-300" />
+                    <Navigation className="w-4 h-4 relative z-10 text-black" />
+                    <span className="relative z-10">Get Directions</span>
                   </button>
                   <button
                     onClick={() => copyToClipboard(info.location, info.key)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg border border-[#327B72]/35 text-[#187153] py-2.5 sm:py-3 hover:bg-[#327B72]/5 transition-all text-xs sm:text-sm font-semibold"
+                    className="flex items-center justify-center gap-1.5 rounded-lg border border-[#6A1324]/40 bg-white/90 text-black py-2.5 sm:py-3 hover:bg-white hover:border-[#6A1324]/60 transition-all text-xs sm:text-sm font-semibold"
                   >
                     {copiedItems.has(info.key) ? (
                       <>
-                        <Check className="w-4 h-4" />
-                        Copied
+                        <Check className="w-4 h-4 text-black" />
+                        <span className="text-black">Copied</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-4 h-4" />
-                        Copy Address
+                        <Copy className="w-4 h-4 text-black" />
+                        <span className="text-black">Copy Address</span>
                       </>
                     )}
                   </button>
@@ -238,104 +237,146 @@ export function Details() {
       {/* Additional Information - Compact for mobile */}
       <div className="relative z-10 mb-4 sm:mb-7 max-w-4xl mx-auto px-3 sm:px-5">
         <div className="text-center mb-3 sm:mb-5">
-          <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2 text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
+          <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2 text-white">
             Important Information
           </h3>
-          <p className="text-[11px] sm:text-xs md:text-sm text-white/90 max-w-xl mx-auto leading-relaxed drop-shadow-[0_3px_12px_rgba(0,0,0,0.7)]">
+          <p className="text-[11px] sm:text-xs md:text-sm text-white max-w-xl mx-auto leading-relaxed">
             Kindly take note of these details to help the day flow smoothly and beautifully.
           </p>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
           {/* Attire Guidelines */}
-          <div className="relative rounded-2xl border border-[#327B72]/40 bg-white/85 backdrop-blur-lg shadow-[0_18px_40px_rgba(24,113,83,0.18)] p-3.5 sm:p-5 overflow-hidden">
+          <div className="relative rounded-2xl border border-white/20 bg-white/90 backdrop-blur-lg shadow-[0_18px_40px_rgba(0,0,0,0.3)] p-3.5 sm:p-5 overflow-hidden">
             <div className="mb-2.5 sm:mb-3 relative z-10 text-center">
-              <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#187153]">
+              <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#6A1324]">
                 Attire &amp; Motif
               </h4>
             </div>
 
-            <div className="relative w-full rounded-2xl overflow-hidden border border-[#327B72]/60 shadow-xl bg-white p-4 sm:p-6 space-y-3 sm:space-y-4">
+            <div className="relative w-full rounded-2xl overflow-hidden border border-[#6A1324]/40 shadow-xl bg-white p-4 sm:p-6 space-y-3 sm:space-y-4">
               <div className="text-center space-y-2 sm:space-y-3">
-                <p className="text-xs sm:text-sm font-semibold text-[#187153]">
+                <p className="text-xs sm:text-sm font-semibold text-black">
                   {siteConfig.dressCode.note}
                 </p>
-                <p className="text-xs sm:text-sm text-[#187153]/90">
+                <p className="text-xs sm:text-sm text-black/80">
                   Please dress within our wedding colors to help create a soft, elegant romantic celebration.
                 </p>
               </div>
 
               <div className="space-y-4">
-                <div className="border-t border-[#327B72] pt-4">
-                  <h5 className="font-semibold text-xs sm:text-sm text-[#187153] mb-2">Principal Sponsors Attire</h5>
-                  <p className="text-[10px] sm:text-xs text-[#187153]/80 mb-2">Kindly align attire below.</p>
-                  <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] rounded-xl overflow-hidden border border-[#327B72] bg-[#FACBC5] mb-3">
+                {/* Principal Sponsors */}
+                <div className="border-t border-[#6A1324]/40 pt-4">
+                  <h5 className="font-semibold text-xs sm:text-sm md:text-base text-black mb-2 flex items-center gap-2">
+                    <span className="w-1 h-4 bg-[#6A1324] rounded-full"></span>
+                    Principal Sponsors
+                  </h5>
+                  <p className="text-[10px] sm:text-xs text-black/70 mb-3">Kindly align attire below.</p>
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] rounded-xl overflow-hidden border-2 border-[#6A1324]/40 bg-white mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+                    onClick={() => setShowImageModal("principal-sponsors")}
+                  >
                     <Image
-                      src="/Details/sponsorAttire.png"
+                      src="/Details/sponsors.png"
                       alt="Principal sponsors attire guideline"
                       fill
-                      className="object-contain"
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
                       sizes="(min-width: 1024px) 700px, (min-width: 640px) 600px, 100vw"
                       priority={false}
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-xl"></div>
                   </div>
-                  <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
-                    <p className="text-[#187153]">
-                      <span className="font-semibold">Male Sponsor:</span> Barong, Black Pants and Leather Shoes
-                    </p>
-                    <p className="text-[#187153]">
-                      <span className="font-semibold">Female Sponsor:</span> shades of Emerald Green, Teal, or Blush Pink Gown
-                    </p>
-                    <div className="pt-1">
-                      {/* <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-[#187153] mb-1">
-                        Palette
+                  <div className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm">
+                    <div className="bg-[#6A1324]/5 rounded-lg p-3 border border-[#6A1324]/20">
+                      <p className="text-black mb-1.5">
+                        <span className="font-semibold text-[#6A1324]">Female:</span> Burgundy/Maroon Formal Dress
                       </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {sponsorPalette.map((color) => (
-                          <span
-                            key={color}
-                            className="w-7 h-7 rounded-full border border-white/70 shadow-sm"
-                            style={{ backgroundColor: color }}
-                            title={color}
-                          />
-                        ))}
-                      </div> */}
+                      <p className="text-black">
+                        <span className="font-semibold text-[#6A1324]">Male:</span> Barong, Black Slacks, Leather Shoes
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="border-t border-[#327B72] pt-4">
-                  <h5 className="font-semibold text-xs sm:text-sm text-[#187153] mb-2">Wedding Guests</h5>
-                  <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] rounded-xl overflow-hidden border border-[#327B72] bg-[#FACBC5] mb-3">
+                {/* Entourage */}
+                <div className="border-t border-[#6A1324]/40 pt-4">
+                  <h5 className="font-semibold text-xs sm:text-sm md:text-base text-black mb-2 flex items-center gap-2">
+                    <span className="w-1 h-4 bg-[#6A1324] rounded-full"></span>
+                    Entourage
+                  </h5>
+                  <p className="text-[10px] sm:text-xs text-black/70 mb-3">Please follow the attire guidelines below.</p>
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] rounded-xl overflow-hidden border-2 border-[#6A1324]/40 bg-white mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+                    onClick={() => setShowImageModal("entourage")}
+                  >
                     <Image
-                      src="/Details/guestAttire.png"
-                      alt="Guest attire guideline"
+                      src="/Details/entourage.png"
+                      alt="Entourage attire guideline"
                       fill
-                      className="object-contain"
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
                       sizes="(min-width: 1024px) 700px, (min-width: 640px) 600px, 100vw"
                       priority={false}
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-xl"></div>
                   </div>
-                  <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
-                    <p className="text-[#187153] font-semibold">
-                      Formal or Semi Formal
-                    </p>
-                    <p className="text-[#187153]">
-                      We Encourage you to dress according to our wedding color.
-                    </p>
-                    <div className="pt-1">
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-[#187153] mb-1">
-                        Palette
+                  <div className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm">
+                    <div className="bg-[#6A1324]/5 rounded-lg p-3 border border-[#6A1324]/20 space-y-2">
+                      <p className="text-black">
+                        <span className="font-semibold text-[#6A1324]">Female:</span> Burgundy Formal Dress
                       </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {guestPalette.map((color) => (
-                          <span
-                            key={color}
-                            className="w-7 h-7 rounded-full border border-white/70 shadow-sm"
-                            style={{ backgroundColor: color }}
-                            title={color}
-                          />
-                        ))}
+                      <p className="text-black">
+                        <span className="font-semibold text-[#6A1324]">Male:</span> White Long Sleeves, Black Slacks, Leather Shoes, Burgundy Vest & Bow Tie
+                      </p>
+                      <p className="text-black">
+                        <span className="font-semibold text-[#6A1324]">Flower Girls:</span> Burgundy Dress
+                      </p>
+                      <p className="text-black">
+                        <span className="font-semibold text-[#6A1324]">Banner Bearer:</span> Black Tuxedo
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Wedding Guests */}
+                <div className="border-t border-[#6A1324]/40 pt-4">
+                  <h5 className="font-semibold text-xs sm:text-sm md:text-base text-black mb-2 flex items-center gap-2">
+                    <span className="w-1 h-4 bg-[#6A1324] rounded-full"></span>
+                    Wedding Guests
+                  </h5>
+                  <p className="text-[10px] sm:text-xs text-black/70 mb-3">We encourage you to dress according to our wedding colors.</p>
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[5/3] rounded-xl overflow-hidden border-2 border-[#6A1324]/40 bg-white mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+                    onClick={() => setShowImageModal("guests")}
+                  >
+                    <Image
+                      src="/Details/guest.png"
+                      alt="Guest attire guideline"
+                      fill
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      sizes="(min-width: 1024px) 700px, (min-width: 640px) 600px, 100vw"
+                      priority={false}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-xl"></div>
+                  </div>
+                  <div className="space-y-2 sm:space-y-2.5 text-xs sm:text-sm">
+                    <div className="bg-gradient-to-br from-[#DEA8B6]/10 via-[#BF7D8B]/10 to-[#7B1E30]/10 rounded-lg p-3 border border-[#6A1324]/20">
+                      <p className="text-black font-semibold mb-2">
+                        Shades of Burgundy: Semi-formal
+                      </p>
+                      <p className="text-black mb-3">
+                        Please dress within our wedding colors to help create a soft, elegant romantic celebration.
+                      </p>
+                      <div className="pt-2 border-t border-[#6A1324]/20">
+                        <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-[#6A1324] mb-2">
+                          Color Palette
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {guestPalette.map((color) => (
+                            <span
+                              key={color}
+                              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white shadow-md hover:scale-110 transition-transform duration-200"
+                              style={{ backgroundColor: color }}
+                              title={color}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -345,19 +386,19 @@ export function Details() {
           </div>
 
           {/* Arrival Time & Reception Guidelines */}
-          <div className="relative rounded-2xl border border-[#327B72]/40 bg-white/85 backdrop-blur-lg shadow-[0_18px_40px_rgba(24,113,83,0.18)] p-3.5 sm:p-5 overflow-hidden">
+          <div className="relative rounded-2xl border border-white/20 bg-white/90 backdrop-blur-lg shadow-[0_18px_40px_rgba(0,0,0,0.3)] p-3.5 sm:p-5 overflow-hidden">
             <div className="space-y-4 sm:space-y-5">
               {/* Arrival Time */}
-              <div className="relative w-full rounded-2xl overflow-hidden border border-[#327B72]/60 shadow-xl bg-white p-4 sm:p-6">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-[#6A1324]/40 shadow-xl bg-white p-4 sm:p-6">
                 <div className="mb-3 sm:mb-4">
-                  <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#187153] mb-3">
+                  <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#6A1324] mb-3">
                     Arrival Time
                   </h4>
                   <div className="space-y-2 sm:space-y-2.5">
-                    <p className="text-xs sm:text-sm text-[#187153] leading-relaxed">
-                      Kindly arrive by <span className="font-semibold text-[#327B72]">{siteConfig.ceremony.guestsTime}</span> so we can begin the wedding ceremony promptly at exactly <span className="font-semibold text-[#327B72]">{siteConfig.ceremony.time}</span>.
+                    <p className="text-xs sm:text-sm text-black leading-relaxed">
+                      Kindly arrive by <span className="font-semibold text-[#6A1324]">{siteConfig.ceremony.guestsTime}</span> so we can begin the wedding ceremony promptly at exactly <span className="font-semibold text-[#6A1324]">{siteConfig.ceremony.time}</span>.
                     </p>
-                    <p className="text-xs sm:text-sm text-[#187153] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-black leading-relaxed">
                       Your punctuality means so much to us — and don&apos;t forget to have a light snack beforehand so you can enjoy the celebration comfortably!
                     </p>
                   </div>
@@ -365,13 +406,13 @@ export function Details() {
               </div>
 
               {/* Reception Guidelines */}
-              <div className="relative w-full rounded-2xl overflow-hidden border border-[#327B72]/60 shadow-xl bg-white p-4 sm:p-6">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-[#6A1324]/40 shadow-xl bg-white p-4 sm:p-6">
                 <div className="mb-3 sm:mb-4">
-                  <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#187153] mb-3">
+                  <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#6A1324] mb-3">
                     Reception Guidelines
                   </h4>
                   <div className="space-y-2 sm:space-y-2.5">
-                    <p className="text-xs sm:text-sm text-[#187153] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-black leading-relaxed">
                       The seating will be formal, RSVP-style. That's why we're asking you to fill out this invitation form to secure your spot. Kindly do not bring plus ones unless explicitly stated in your invitation.
                     </p>
                   </div>
@@ -380,26 +421,26 @@ export function Details() {
             </div>
           </div>
 
-          {/* Travel & Parking - Compact, emerald motif */}
-          <div className="relative rounded-2xl border border-[#327B72]/70 bg-[#FACBC5]/90 backdrop-blur-lg shadow-[0_18px_40px_rgba(24,113,83,0.18)] p-3.5 sm:p-5 overflow-hidden">
+          {/* Travel & Parking - Wedding motif */}
+          <div className="relative rounded-2xl border border-white/20 bg-white/90 backdrop-blur-lg shadow-[0_18px_40px_rgba(0,0,0,0.3)] p-3.5 sm:p-5 overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-center gap-2 mb-2.5 sm:mb-3 relative z-10">
-              <div className="p-1.5 rounded-full shadow-md bg-white/95 border border-[#327B72]/60">
-                <Car className="w-3.5 h-3.5 text-[#187153]" />
+              <div className="p-1.5 rounded-full shadow-md bg-white/95 border border-[#6A1324]/40">
+                <Car className="w-3.5 h-3.5 text-[#6A1324]" />
               </div>
-              <h4 className="font-semibold text-xs sm:text-base text-[#187153]">Parking &amp; Travel</h4>
+              <h4 className="font-semibold text-xs sm:text-base text-black">Parking &amp; Travel</h4>
             </div>
 
             <div className="space-y-3 relative z-10">
               {/* Parking */}
-              <div className="rounded-xl p-2.5 sm:p-3 border border-[#327B72]/80 bg-gradient-to-br from-white/95 via-[#FACBC5]/95 to-white/90 shadow-sm">
+              <div className="rounded-xl p-2.5 sm:p-3 border border-[#6A1324]/40 bg-white shadow-sm">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-[#187153]/90 text-white">
+                  <div className="p-2 rounded-lg bg-[#6A1324] text-white">
                     <Car className="w-4 h-4" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-[11px] sm:text-sm font-semibold text-[#187153]">Parking Available</p>
-                    <p className="text-[10px] sm:text-xs text-[#187153]/85">
+                    <p className="text-[11px] sm:text-sm font-semibold text-black">Parking Available</p>
+                    <p className="text-[10px] sm:text-xs text-black/80">
                       Parking is available at the venue. Please arrive early to find a comfortable spot.
                     </p>
                   </div>
@@ -407,14 +448,14 @@ export function Details() {
               </div>
 
               {/* Transportation */}
-              <div className="rounded-xl p-2.5 sm:p-3 border border-[#327B72]/80 bg-gradient-to-br from-white/95 via-[#FACBC5]/95 to-white/90 shadow-sm">
+              <div className="rounded-xl p-2.5 sm:p-3 border border-[#6A1324]/40 bg-white shadow-sm">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-[#327B72]/90 text-white">
+                  <div className="p-2 rounded-lg bg-black text-white">
                     <Navigation className="w-4 h-4" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-[11px] sm:text-sm font-semibold text-[#187153]">Transportation</p>
-                    <p className="text-[10px] sm:text-xs text-[#187153]/85">
+                    <p className="text-[11px] sm:text-sm font-semibold text-black">Transportation</p>
+                    <p className="text-[10px] sm:text-xs text-black/80">
                       Private vehicles and local transport are welcome. Coordinate with friends or family and plan your
                       route ahead of time.
                     </p>
@@ -423,24 +464,24 @@ export function Details() {
               </div>
 
               {/* Tips */}
-              <div className="rounded-xl p-2.5 sm:p-3 border border-[#327B72]/75 bg-gradient-to-br from-white/95 via-[#FACBC5]/95 to-white/90">
-                <p className="text-[11px] sm:text-sm font-semibold mb-2 flex items-center gap-2 text-[#187153]">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#187153]/10 text-[#187153]">
+              <div className="rounded-xl p-2.5 sm:p-3 border border-[#6A1324]/30 bg-white">
+                <p className="text-[11px] sm:text-sm font-semibold mb-2 flex items-center gap-2 text-black">
+                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#6A1324]/10 text-[#6A1324]">
                     <MapPin className="w-3.5 h-3.5" />
                   </span>
                   Quick Tips
                 </p>
-                <ul className="text-[10px] sm:text-xs space-y-1 text-[#187153]/90">
+                <ul className="text-[10px] sm:text-xs space-y-1 text-black/80">
                   <li className="flex items-start gap-2">
-                    <span className="text-[#327B72] mt-0.5">•</span>
+                    <span className="text-[#6A1324] mt-0.5">•</span>
                     <span>Plan your route ahead to avoid unexpected delays.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[#327B72] mt-0.5">•</span>
+                    <span className="text-[#6A1324] mt-0.5">•</span>
                     <span>Please avoid walking during the ceremony. Approach the coordinator or wait to be guided.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-[#327B72] mt-0.5">•</span>
+                    <span className="text-[#6A1324] mt-0.5">•</span>
                     <span>Coordinate carpooling with friends or family when possible.</span>
                   </li>
                 </ul>
@@ -455,59 +496,80 @@ export function Details() {
         <div
           className="fixed inset-0 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-500"
           onClick={() => setShowImageModal(null)}
-          style={{ backgroundColor: "rgba(250, 203, 197, 0.96)" }}
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
         >
           {/* Decorative background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div
               className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "#187153", opacity: 0.12 }}
+              style={{ backgroundColor: "#6A1324", opacity: 0.15 }}
             />
             <div
               className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "#327B72", opacity: 0.14, animationDelay: "1s" }}
+              style={{ backgroundColor: "#000000", opacity: 0.2, animationDelay: "1s" }}
             />
           </div>
 
           <div
             className="relative max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] bg-gradient-to-br from-white via-white rounded-3xl overflow-hidden shadow-2xl border-2 animate-in zoom-in-95 duration-500 group"
             onClick={(e) => e.stopPropagation()}
-            style={{ borderColor: "#1871531f", backgroundColor: "#FACBC5" }}
+            style={{ borderColor: "#6A132433", backgroundColor: "#FFFFFF" }}
           >
             {/* Decorative top accent */}
             <div
               className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
-              style={{ background: "linear-gradient(to right, #187153, #327B72, #FACBC5)" }}
+              style={{ background: "linear-gradient(to right, #6A1324, #8B1A2E, #000000)" }}
             />
 
             {/* Enhanced close button */}
             <button
               onClick={() => setShowImageModal(null)}
-              className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 hover:bg-white backdrop-blur-sm p-2.5 sm:p-3 rounded-xl shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 border-2 group/close"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 hover:bg-black/5 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 border-2 group/close"
               title="Close (ESC)"
-              style={{ backgroundColor: "#FACBC5", borderColor: "#18715333", color: "#187153" }}
+              style={{ backgroundColor: "#FFFFFF", borderColor: "#6A132433", color: "#000000" }}
             >
-              <X className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover/close:text-[#187153] transition-colors" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover/close:text-[#6A1324] transition-colors" />
             </button>
 
-            {/* Venue badge */}
+            {/* Venue/Attire badge */}
             <div className="absolute top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 z-20">
               <div
                 className="flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-full shadow-xl border-2"
-                style={{ backgroundColor: "#FACBC5", borderColor: "#18715333" }}
+                style={{ backgroundColor: "#FFFFFF", borderColor: "#6A132433" }}
               >
                 {showImageModal === "ceremony" ? (
                   <>
-                    <Heart className="w-4 h-4" fill="#327B72" style={{ color: "#187153" }} />
-                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#187153" }}>
+                    <Heart className="w-4 h-4" fill="#6A1324" style={{ color: "#6A1324" }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#000000" }}>
                       Ceremony Venue
+                    </span>
+                  </>
+                ) : showImageModal === "reception" ? (
+                  <>
+                    <Utensils className="w-4 h-4" style={{ color: "#6A1324" }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#000000" }}>
+                      Reception Venue
+                    </span>
+                  </>
+                ) : showImageModal === "principal-sponsors" ? (
+                  <>
+                    <Heart className="w-4 h-4" fill="#6A1324" style={{ color: "#6A1324" }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#000000" }}>
+                      Principal Sponsors Attire
+                    </span>
+                  </>
+                ) : showImageModal === "entourage" ? (
+                  <>
+                    <Heart className="w-4 h-4" fill="#6A1324" style={{ color: "#6A1324" }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#000000" }}>
+                      Entourage Attire
                     </span>
                   </>
                 ) : (
                   <>
-                    <Utensils className="w-4 h-4" style={{ color: "#327B72" }} />
-                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#187153" }}>
-                      Reception Venue
+                    <Heart className="w-4 h-4" fill="#6A1324" style={{ color: "#6A1324" }} />
+                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#000000" }}>
+                      Guest Attire
                     </span>
                   </>
                 )}
@@ -517,14 +579,34 @@ export function Details() {
             {/* Image section with enhanced effects */}
             <div
               className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] overflow-hidden"
-              style={{ backgroundColor: "#FACBC5" }}
+              style={{ backgroundColor: "#FFFFFF" }}
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0" />
 
               <Image
-                src={showImageModal === "ceremony" ? "/Details/Casa Joros Mendenilla Resort Catanauan Quezon.jpg" : "/Details/Casa Pavillion.png"}
-                alt={showImageModal === "ceremony" ? siteConfig.ceremony.location : siteConfig.reception.location}
+                src={
+                  showImageModal === "ceremony"
+                    ? "/Details/Casa Joros Mendenilla Resort Catanauan Quezon.jpg"
+                    : showImageModal === "reception"
+                    ? "/Details/Casa Pavillion.png"
+                    : showImageModal === "principal-sponsors"
+                    ? "/Details/sponsors.png"
+                    : showImageModal === "entourage"
+                    ? "/Details/entourage.png"
+                    : "/Details/guest.png"
+                }
+                alt={
+                  showImageModal === "ceremony"
+                    ? siteConfig.ceremony.location
+                    : showImageModal === "reception"
+                    ? siteConfig.reception.location
+                    : showImageModal === "principal-sponsors"
+                    ? "Principal sponsors attire guideline"
+                    : showImageModal === "entourage"
+                    ? "Entourage attire guideline"
+                    : "Guest attire guideline"
+                }
                 fill
                 className="object-contain p-6 sm:p-8 md:p-10 transition-transform duration-700 group-hover:scale-105 z-10"
                 sizes="95vw"
@@ -535,10 +617,10 @@ export function Details() {
             {/* Enhanced content section */}
             <div
               className="p-5 sm:p-6 md:p-8 bg-gradient-to-br from-white to-white/95 backdrop-blur-sm border-t-2 relative"
-              style={{ borderColor: "#1871531f", backgroundColor: "#FACBC5" }}
+              style={{ borderColor: "#6A13241f", backgroundColor: "#FFFFFF" }}
             >
               {/* Decorative line */}
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#187153]/30 to-transparent" />
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#6A1324]/30 to-transparent" />
 
               <div className="space-y-5">
                 {/* Header with venue info */}
@@ -546,36 +628,48 @@ export function Details() {
                   <div className="space-y-2">
                     <h3
                       className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-3"
-                      style={{ color: "#187153" }}
+                      style={{ color: "#000000" }}
                     >
                       {showImageModal === "ceremony" ? (
-                        <Heart className="w-6 h-6" fill="#327B72" style={{ color: "#187153" }} />
+                        <Heart className="w-6 h-6" fill="#6A1324" style={{ color: "#6A1324" }} />
+                      ) : showImageModal === "reception" ? (
+                        <Utensils className="w-6 h-6" style={{ color: "#6A1324" }} />
                       ) : (
-                        <Utensils className="w-6 h-6" style={{ color: "#327B72" }} />
+                        <Heart className="w-6 h-6" fill="#6A1324" style={{ color: "#6A1324" }} />
                       )}
-                      {showImageModal === "ceremony" ? siteConfig.ceremony.venue : siteConfig.reception.venue}
+                      {showImageModal === "ceremony"
+                        ? siteConfig.ceremony.venue
+                        : showImageModal === "reception"
+                        ? siteConfig.reception.venue
+                        : showImageModal === "principal-sponsors"
+                        ? "Principal Sponsors Attire"
+                        : showImageModal === "entourage"
+                        ? "Entourage Attire"
+                        : "Guest Attire Guidelines"}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm opacity-70" style={{ color: "#187153" }}>
-                      <MapPin className="w-4 h-4" style={{ color: "#187153" }} />
-                      <span>
-                        {showImageModal === "ceremony"
-                          ? siteConfig.ceremony.location
-                          : siteConfig.reception.location}
-                      </span>
-                    </div>
+                    {(showImageModal === "ceremony" || showImageModal === "reception") && (
+                      <div className="flex items-center gap-2 text-sm opacity-70" style={{ color: "#000000" }}>
+                        <MapPin className="w-4 h-4" style={{ color: "#6A1324" }} />
+                        <span>
+                          {showImageModal === "ceremony"
+                            ? siteConfig.ceremony.location
+                            : siteConfig.reception.location}
+                        </span>
+                      </div>
+                    )}
 
                     {/* Date & Time info */}
                     {showImageModal === "ceremony" && (
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
                         style={{
-                          color: "#187153",
-                          backgroundColor: "#FACBC5",
-                          opacity: 0.9,
-                          borderColor: "#18715333",
+                          color: "#000000",
+                          backgroundColor: "#FFFFFF",
+                          opacity: 0.95,
+                          borderColor: "#6A132433",
                         }}
                       >
-                        <Clock className="w-4 h-4" style={{ color: "#187153" }} />
+                        <Clock className="w-4 h-4" style={{ color: "#6A1324" }} />
                         <span>
                           {siteConfig.ceremony.date} at {siteConfig.ceremony.time}
                         </span>
@@ -585,13 +679,13 @@ export function Details() {
                       <div
                         className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
                         style={{
-                          color: "#187153",
-                          backgroundColor: "#FACBC5",
-                          opacity: 0.9,
-                          borderColor: "#327B7233",
+                          color: "#000000",
+                          backgroundColor: "#FFFFFF",
+                          opacity: 0.95,
+                          borderColor: "#6A132433",
                         }}
                       >
-                        <Clock className="w-4 h-4" style={{ color: "#327B72" }} />
+                        <Clock className="w-4 h-4" style={{ color: "#6A1324" }} />
                         <span>
                           {siteConfig.reception.date} - {siteConfig.reception.time}
                         </span>
@@ -599,54 +693,57 @@ export function Details() {
                     )}
                   </div>
 
-                  {/* Action buttons */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-                    <button
-                      onClick={() =>
-                        copyToClipboard(
-                          showImageModal === "ceremony"
-                            ? siteConfig.ceremony.location
-                            : siteConfig.reception.location,
-                          `modal-${showImageModal}`,
-                        )
-                      }
-                      className="flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 bg-white border-2 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 shadow-md hover:bg-[#FACBC5]/25 whitespace-nowrap"
-                      title="Copy address"
-                      style={{ borderColor: "#18715333", color: "#187153" }}
-                    >
-                      {copiedItems.has(`modal-${showImageModal}`) ? (
-                        <>
-                          <Check className="w-4 h-4" />
-                          <span>Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4" />
-                          <span>Copy Address</span>
-                        </>
-                      )}
-                    </button>
+                  {/* Action buttons - only show for venue modals */}
+                  {(showImageModal === "ceremony" || showImageModal === "reception") && (
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                      <button
+                        onClick={() =>
+                          copyToClipboard(
+                            showImageModal === "ceremony"
+                              ? siteConfig.ceremony.location
+                              : siteConfig.reception.location,
+                            `modal-${showImageModal}`,
+                          )
+                        }
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 bg-white border-2 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 shadow-md hover:bg-black/5 whitespace-nowrap"
+                        title="Copy address"
+                        style={{ borderColor: "#6A132433", color: "#000000" }}
+                      >
+                        {copiedItems.has(`modal-${showImageModal}`) ? (
+                          <>
+                            <Check className="w-4 h-4 text-black" />
+                            <span className="text-black">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4 text-black" />
+                            <span className="text-black">Copy Address</span>
+                          </>
+                        )}
+                      </button>
 
-                    <button
-                      onClick={() =>
-                        openInMaps(showImageModal === "ceremony" ? ceremonyMapsLink : receptionMapsLink)
-                      }
-                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 shadow-lg whitespace-nowrap text-white"
-                      style={{
-                        background:
-                          showImageModal === "ceremony"
-                            ? "linear-gradient(to right, #187153, #327B72)"
-                            : "linear-gradient(to right, #327B72, #FACBC5)",
-                      }}
-                    >
-                      <Navigation className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span>Get Directions</span>
-                    </button>
-                  </div>
+                      <button
+                        onClick={() =>
+                          openInMaps(showImageModal === "ceremony" ? ceremonyMapsLink : receptionMapsLink)
+                        }
+                        className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 shadow-lg whitespace-nowrap text-white"
+                        style={{
+                          background:
+                            showImageModal === "ceremony"
+                              ? "linear-gradient(to right, #6A1324, #8B1A2E)"
+                              : "linear-gradient(to right, #000000, #6A1324)",
+                          color: "#FFFFFF",
+                        }}
+                      >
+                        <Navigation className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span>Get Directions</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 {/* Additional info */}
-                <div className="flex items-center gap-2 text-xs opacity-65" style={{ color: "#187153" }}>
+                <div className="flex items-center gap-2 text-xs opacity-65" style={{ color: "#000000" }}>
                   <span className="flex items-center gap-1.5">
                     <Camera className="w-3 h-3" />
                     Click outside to close

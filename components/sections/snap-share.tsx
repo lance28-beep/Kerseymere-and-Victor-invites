@@ -23,9 +23,9 @@ export function SnapShare() {
   const websiteUrl = typeof window !== "undefined" ? window.location.href : "https://example.com"
   const driveLink = siteConfig.snapShare?.googleDriveLink || ""
   const hashtags = [
-    "#NathanielAndJasmin2026",
-    "#NathanielJasminForever",
-    "#NathanielAndJasmin"
+    "#KerseyAndVictor2026",
+    "#KerseyVictorForever",
+    "#KerseyAndVictor"
   ]
   const allHashtagsText = hashtags.join(" ")
   const groomNickname = siteConfig.couple.groomNickname
@@ -156,13 +156,17 @@ export function SnapShare() {
 
         <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-10" variants={staggerChildren} initial="initial" animate="animate">
           <motion.div
-            className="p-[1.5px] rounded-xl sm:rounded-[22px] bg-gradient-to-br from-[#327B72]/50 via-[#187153]/30 to-[#327B72]/50 h-full lg:order-1"
+            className="p-[1.5px] rounded-xl sm:rounded-[22px] bg-gradient-to-br from-black/50 via-gray-900/30 to-black/50 h-full lg:order-1"
             variants={fadeInUp}
             whileHover={{ y: -2 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="bg-gradient-to-br from-[#327B72] to-[#187153] rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-8 shadow-xl border border-[#327B72]/40 h-full flex flex-col justify-start">
-              <div className="flex flex-col w-full">
+            <div className="relative bg-gradient-to-br from-black via-gray-900 to-black rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-8 shadow-xl border border-white/20 h-full flex flex-col justify-start overflow-hidden">
+              {/* Premium gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+              <div className="relative z-10 flex flex-col w-full">
                 <h4 className={`${cormorant.className} text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-white mb-2 sm:mb-4 text-center`}>
                   Our Favorite Moments
                 </h4>
@@ -197,17 +201,21 @@ export function SnapShare() {
           </motion.div>
 
           <motion.div className="space-y-3 sm:space-y-5 lg:space-y-6 h-full flex flex-col lg:order-2" variants={fadeInUp}>
-            <div className="p-[1.5px] rounded-xl sm:rounded-[22px] bg-gradient-to-br from-[#327B72]/50 via-[#187153]/30 to-[#327B72]/50 flex-1">
-              <div className="bg-gradient-to-br from-[#327B72] to-[#187153] rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-8 shadow-xl border border-[#327B72]/40 text-center h-full flex flex-col">
-                <h4 className={`${cormorant.className} text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3`}>
+            <div className="p-[1.5px] rounded-xl sm:rounded-[22px] bg-gradient-to-br from-black/50 via-gray-900/30 to-black/50 flex-1">
+              <div className="relative bg-gradient-to-br from-black via-gray-900 to-black rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-8 shadow-xl border border-white/20 text-center h-full flex flex-col overflow-hidden">
+                {/* Premium gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+                <h4 className={`${cormorant.className} relative z-10 text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3`}>
                   Share Our Wedding Website
                 </h4>
-                <p className={`${cormorant.className} text-white text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed px-1`}>
+                <p className={`${cormorant.className} relative z-10 text-white text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed px-1`}>
                   Spread the word about {groomNickname} & {brideNickname}'s wedding celebration. Share this QR code with friends and family so they can join the celebration.
                 </p>
-                <div className="mx-auto inline-flex flex-col items-center bg-white/90 backdrop-blur-sm p-2.5 sm:p-5 md:p-7 rounded-xl sm:rounded-2xl shadow-md border border-[#327B72]/40 mb-3 sm:mb-4 flex-1 justify-center">
-                  <div className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-white border border-[#327B72]/30">
-                    <div className="bg-white p-1.5 sm:p-3 rounded-lg shadow-sm border border-[#327B72]/30">
+                <div className="relative z-10 mx-auto inline-flex flex-col items-center bg-white/90 backdrop-blur-sm p-2.5 sm:p-5 md:p-7 rounded-xl sm:rounded-2xl shadow-md border border-white/40 mb-3 sm:mb-4 flex-1 justify-center">
+                  <div className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-white border border-black/30">
+                    <div className="bg-white p-1.5 sm:p-3 rounded-lg shadow-sm border border-black/30">
                       <QRCodeCanvas 
                         id="snapshare-qr" 
                         value={websiteUrl} 
@@ -219,43 +227,47 @@ export function SnapShare() {
                   </div>
                   <button
                     onClick={downloadQRCode}
-                    className="flex items-center gap-1.5 sm:gap-2 mx-auto px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white text-[#187153] border border-[#327B72]/40 shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-[#F4F4F4] transition-all duration-200 text-xs sm:text-sm font-semibold"
+                    className="flex items-center gap-1.5 sm:gap-2 mx-auto px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white text-black border border-black/40 shadow-md hover:shadow-lg hover:-translate-y-0.5 hover:bg-gray-50 transition-all duration-200 text-xs sm:text-sm font-semibold"
                   >
                     <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span className={`${cormorant.className} tracking-[0.15em] sm:tracking-[0.18em] uppercase font-medium`}>Download QR</span>
                   </button>
                 </div>
-                <p className={`${cormorant.className} text-white text-xs sm:text-sm mt-auto leading-relaxed`}>
+                <p className={`${cormorant.className} relative z-10 text-white text-xs sm:text-sm mt-auto leading-relaxed`}>
                   Scan with any camera app to open the full invitation and schedule.
                 </p>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-[#327B72] to-[#187153] rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-xl border border-[#327B72]/40">
-              <h5 className={`${cormorant.className} text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3 text-center`}>
+            <div className="relative bg-gradient-to-br from-black via-gray-900 to-black rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-xl border border-white/20 overflow-hidden">
+              {/* Premium gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+              <h5 className={`${cormorant.className} relative z-10 text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3 text-center`}>
                 Use Our Hashtags
               </h5>
-              <p className={`${cormorant.className} text-white text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}>
+              <p className={`${cormorant.className} relative z-10 text-white text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}>
                 Tag your photos and posts with our wedding hashtags to join the celebration!
               </p>
               
-              <div className="space-y-2.5 sm:space-y-3 mb-3 sm:mb-4">
+              <div className="relative z-10 space-y-2.5 sm:space-y-3 mb-3 sm:mb-4">
                 {hashtags.map((hashtag, index) => (
                   <motion.div
                     key={index}
-                    className="bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-[#327B72]/40 shadow-sm hover:shadow-md transition-all duration-200"
+                    className="bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-black/40 shadow-sm hover:shadow-md transition-all duration-200"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
-                      <span className={`${cormorant.className} text-[#187153] font-bold text-sm sm:text-base md:text-lg break-all flex-1 text-center sm:text-left`}>
+                      <span className={`${cormorant.className} text-black font-bold text-sm sm:text-base md:text-lg break-all flex-1 text-center sm:text-left`}>
                         {hashtag}
                       </span>
                       <button
                         onClick={() => copyHashtag(hashtag, index)}
-                        className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-[#187153] to-[#327B72] text-white transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 border border-[#187153]/50 whitespace-nowrap flex-shrink-0 ${
+                        className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-black to-gray-800 text-white transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 border border-black/50 whitespace-nowrap flex-shrink-0 ${
                           copiedHashtagIndex === index ? "bg-green-600 from-green-600 to-green-500" : ""
                         }`}
                       >
@@ -296,14 +308,18 @@ export function SnapShare() {
               </button>
             </div>
 
-            <div className="bg-gradient-to-br from-[#327B72] to-[#187153] rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-xl border border-[#327B72]/40">
-              <h5 className={`${cormorant.className} text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3 text-center`}>
+            <div className="relative bg-gradient-to-br from-black via-gray-900 to-black rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-xl border border-white/20 overflow-hidden">
+              {/* Premium gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+              <h5 className={`${cormorant.className} relative z-10 text-base sm:text-lg md:text-xl font-semibold text-white mb-2 sm:mb-3 text-center`}>
                 Share on Social Media
               </h5>
-              <p className={`${cormorant.className} text-white text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}>
+              <p className={`${cormorant.className} relative z-10 text-white text-xs sm:text-sm text-center mb-3 sm:mb-4 leading-relaxed`}>
                 Help spread the word about {groomNickname} & {brideNickname}'s wedding celebration. Share the event across your favorite platforms.
               </p>
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
+              <div className="relative z-10 grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
                 <button
                   onClick={() => shareOnSocial("instagram")}
                   className="group flex items-center justify-center gap-1.5 sm:gap-2 bg-white/20 backdrop-blur-sm text-white px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg hover:bg-white/30 transition-all duration-200 shadow-md hover:shadow-lg border border-white/30"
@@ -336,26 +352,30 @@ export function SnapShare() {
             </div>
 
             {driveLink && (
-              <div className="p-[1.5px] rounded-xl sm:rounded-[22px] bg-gradient-to-br from-[#327B72]/50 via-[#187153]/30 to-[#327B72]/50">
-                <div className="bg-gradient-to-br from-[#327B72] to-[#187153] rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-xl border border-[#327B72]/40 text-center">
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/30 bg-white/20 backdrop-blur-sm px-2.5 py-1 text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.32em] text-white mb-2 sm:mb-3">
+              <div className="p-[1.5px] rounded-xl sm:rounded-[22px] bg-gradient-to-br from-black/50 via-gray-900/30 to-black/50">
+                <div className="relative bg-gradient-to-br from-black via-gray-900 to-black rounded-lg sm:rounded-[20px] p-3 sm:p-5 md:p-7 shadow-xl border border-white/20 text-center overflow-hidden">
+                  {/* Premium gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-black/80" />
+                  <div className="relative z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/30 bg-white/20 backdrop-blur-sm px-2.5 py-1 text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.32em] text-white mb-2 sm:mb-3">
                     Upload Your Photos & Videos
                   </div>
-                  <p className={`${cormorant.className} text-white text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 px-1`}>
+                  <p className={`${cormorant.className} relative z-10 text-white text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 px-1`}>
                     Help us capture our special day! Scan the QR or use the actions below to drop your clips into our shared Drive.
                   </p>
-                  <div className="mx-auto inline-flex flex-col items-center bg-white/90 backdrop-blur-sm p-2.5 sm:p-5 rounded-xl sm:rounded-2xl shadow-md border border-[#327B72]/40 mb-3 sm:mb-4">
-                    <div className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-white border border-[#327B72]/30">
-                      <div className="bg-white p-1.5 sm:p-3 rounded-lg shadow-sm border border-[#327B72]/30">
+                  <div className="relative z-10 mx-auto inline-flex flex-col items-center bg-white/90 backdrop-blur-sm p-2.5 sm:p-5 rounded-xl sm:rounded-2xl shadow-md border border-white/40 mb-3 sm:mb-4">
+                    <div className="mb-2 sm:mb-3 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-white border border-black/30">
+                      <div className="bg-white p-1.5 sm:p-3 rounded-lg shadow-sm border border-black/30">
                         <QRCodeCanvas id="drive-qr" value={driveLink} size={isMobile ? 130 : 200} includeMargin className="bg-white" />
                       </div>
                     </div>
-                    <p className={`${cormorant.className} text-[#187153] text-xs sm:text-sm`}>📱 Scan with your camera app</p>
+                    <p className={`${cormorant.className} text-black text-xs sm:text-sm`}>📱 Scan with your camera app</p>
                   </div>
-                  <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-3">
+                  <div className="relative z-10 flex flex-col sm:flex-row justify-center gap-2 sm:gap-3">
                     <button
                       onClick={copyDriveLink}
-                      className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white text-[#187153] border border-[#327B72]/40 shadow-sm hover:shadow-md hover:bg-[#F4F4F4] text-xs sm:text-sm transition-all ${
+                      className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white text-black border border-black/40 shadow-sm hover:shadow-md hover:bg-gray-50 text-xs sm:text-sm transition-all ${
                         copiedDriveLink ? "bg-green-100 border-green-300" : ""
                       }`}
                     >
@@ -373,7 +393,7 @@ export function SnapShare() {
                     </button>
                     <button
                       onClick={downloadDriveQRCode}
-                      className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white text-[#187153] border border-[#327B72]/40 shadow-sm hover:shadow-md hover:bg-[#F4F4F4] text-xs sm:text-sm transition-all font-semibold"
+                      className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-white text-black border border-black/40 shadow-sm hover:shadow-md hover:bg-gray-50 text-xs sm:text-sm transition-all font-semibold"
                     >
                       <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       <span className={`${cormorant.className} tracking-[0.15em] sm:tracking-[0.18em] uppercase font-medium`}>Download QR</span>
@@ -388,7 +408,7 @@ export function SnapShare() {
                       <span className={`${cormorant.className} tracking-[0.15em] sm:tracking-[0.18em] uppercase font-medium`}>Open Drive</span>
                     </a>
                   </div>
-                  <p className={`${cormorant.className} text-white text-xs sm:text-sm mt-2 sm:mt-3 leading-relaxed`}>or tap "Open Google Drive Folder."</p>
+                  <p className={`${cormorant.className} relative z-10 text-white text-xs sm:text-sm mt-2 sm:mt-3 leading-relaxed`}>or tap "Open Google Drive Folder."</p>
                 </div>
               </div>
             )}
