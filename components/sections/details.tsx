@@ -133,7 +133,7 @@ export function Details() {
               time: siteConfig.ceremony.time,
               mapLink: ceremonyMapsLink,
               gradient: "from-[#6A1324] via-[#8B1A2E] to-black",
-              image: "/Details/Casa Joros Mendenilla Resort Catanauan Quezon.jpg",
+              image: "/Details/Capilla De Sta. Rita De Cascia.jpg",
             },
             {
               key: "reception",
@@ -144,7 +144,7 @@ export function Details() {
               time: siteConfig.reception.time,
               mapLink: receptionMapsLink,
               gradient: "from-[#6A1324] via-[#8B1A2E] to-black",
-              image: "/Details/Casa Pavillion.png",
+              image: "/Details/Villa Leonora Resort & Event Venue.jpg",
             },
           ].map((info) => (
             <div
@@ -587,9 +587,9 @@ export function Details() {
               <Image
                 src={
                   showImageModal === "ceremony"
-                    ? "/Details/Casa Joros Mendenilla Resort Catanauan Quezon.jpg"
+                    ? "/Details/Capilla De Sta. Rita De Cascia.jpg"
                     : showImageModal === "reception"
-                    ? "/Details/Casa Pavillion.png"
+                    ? "/Details/Villa Leonora Resort & Event Venue.jpg"
                     : showImageModal === "principal-sponsors"
                     ? "/Details/sponsors.png"
                     : showImageModal === "entourage"
