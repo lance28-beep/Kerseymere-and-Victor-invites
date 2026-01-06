@@ -7,7 +7,7 @@ export const siteConfig = {
   },
   wedding: {
     date: "March 19, 2026",
-    time: "2:00 PM",
+    time: "2:30 PM",
     venue: "Capilla De Sta. Rita De Cascia ( Colegio San Agustin, SJDM) / Villa Leonora Resort & Event Venue",
     tagline: "are getting married!",
     theme: "Purple & Sage Motif",
@@ -23,9 +23,9 @@ export const siteConfig = {
     venue: "Capilla De Sta. Rita De Cascia ( Colegio San Agustin, SJDM)",
     date: "March 19, 2026",
     day: "Thursday",
-    time: "2:00 PM",
+    time: "2:30 PM",
     entourageTime: "1:30 PM",
-    guestsTime: "1:30 PM",
+    guestsTime: "2:00 PM",
   },
   reception: {
     location: "Villa Leonora Resort & Event Venue",

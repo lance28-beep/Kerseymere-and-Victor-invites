@@ -156,7 +156,7 @@ export function PrincipalSponsors() {
             className="style-script-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-1.5 sm:mb-3 md:mb-4"
             style={{ textShadow: "0 4px 18px rgba(0,0,0,0.9)" }}
           >
-            Standing with {brideNickname} &amp; {groomNickname}
+            Standing with {groomNickname} &amp; {brideNickname}
           </h2>
 
           {/* Simple divider with gold accent */}

@@ -81,7 +81,7 @@ const timelineEvents: TimelineEvent[] = [
   {
     time: ceremonyTime,
     title: "Wedding Ceremony",
-    description: `Celebrate ${brideNickname} & ${groomNickname} as they say "I do."`,
+    description: `Celebrate ${groomNickname} & ${brideNickname} as they say "I do."`,
     location: ceremonyVenue,
     icon: RingsIcon,
     imageSrc: "/weddingtimeline/WeddingCeremony.png",
@@ -129,7 +129,7 @@ const timelineEvents: TimelineEvent[] = [
   {
     time: calculateTime(ceremonyTime, 5, 0), // 5 hours after ceremony
     title: "Dancing & Celebration",
-    description: `Watch ${brideNickname} & ${groomNickname} share their first dance as husband and wife, then join us as we celebrate and dance the night away together!`,
+    description: `Watch ${groomNickname} & ${brideNickname} share their first dance as husband and wife, then join us as we celebrate and dance the night away together!`,
     location: receptionVenue,
     icon: DanceIcon,
     imageSrc: "/weddingtimeline/dance.png",
@@ -137,7 +137,7 @@ const timelineEvents: TimelineEvent[] = [
   {
     time: calculateTime(ceremonyTime, 6, 30), // 6.5 hours after ceremony
     title: "Send-off",
-    description: `A warm send-off for ${brideNickname} & ${groomNickname} as they begin their new chapter together.`,
+    description: `A warm send-off for ${groomNickname} & ${brideNickname} as they begin their new chapter together.`,
     location: receptionVenue,
     icon: CarIcon,
     imageSrc: "/weddingtimeline/SendOff.png",

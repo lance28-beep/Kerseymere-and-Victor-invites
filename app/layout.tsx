@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { siteConfig } from "@/content/site"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kerseymere-and-victor-invites.netlify.app/"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kerseymere-and-victor-invites.vercel.app/"
 const canonicalUrl = siteUrl.replace(/\/$/, "")
 const desktopHero = "/Details/linkPreviews.jpg"
 const mobileHero = "/Details/linkPreviews.jpg"
@@ -19,7 +19,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: `${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} Wedding`,
-  startDate: "2026-03-06T14:00:00+08:00",
+  startDate: "2026-03-06T14:30:00+08:00",
   endDate: "2026-03-06T22:00:00+08:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",

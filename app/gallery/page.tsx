@@ -63,7 +63,7 @@ export default async function GalleryPage() {
             Our Love Story Gallery
           </h1>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/90 font-light max-w-xl mx-auto leading-relaxed px-2">
-            Every photograph tells a story of {siteConfig.couple.brideNickname} & {siteConfig.couple.groomNickname}'s journey to forever
+            Every photograph tells a story of {siteConfig.couple.groomNickname} & {siteConfig.couple.brideNickname}'s journey to forever
           </p>
           
           {/* Decorative element below subtitle */}

@@ -30,7 +30,7 @@ interface MessageFormProps {
 
 function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
   const { brideNickname, groomNickname } = siteConfig.couple
-  const coupleDisplayName = `${brideNickname} & ${groomNickname}`
+  const coupleDisplayName = `${groomNickname} & ${brideNickname}`
 
   const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -285,7 +285,7 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
 
 export function Messages() {
   const { brideNickname, groomNickname } = siteConfig.couple
-  const coupleDisplayName = `${brideNickname} & ${groomNickname}`
+  const coupleDisplayName = `${groomNickname} & ${brideNickname}`
 
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(false)

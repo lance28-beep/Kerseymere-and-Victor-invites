@@ -33,7 +33,7 @@ const galleryItems = [
 
 export function Gallery() {
   const { brideNickname, groomNickname } = siteConfig.couple
-  const coupleDisplayName = `${brideNickname} & ${groomNickname}`
+  const coupleDisplayName = `${groomNickname} & ${brideNickname}`
   const [selectedImage, setSelectedImage] = useState<(typeof galleryItems)[0] | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isLoading, setIsLoading] = useState(true)

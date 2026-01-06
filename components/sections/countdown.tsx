@@ -183,8 +183,8 @@ export function Countdown() {
         >
           <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[40rem] xl:h-[40rem] opacity-90">
             <Image
-              src="/monogram/monogram.png"
-              alt={`${brideNickname} & ${groomNickname} Monogram`}
+              src="/monogram/newmonogram.png"
+              alt={`${groomNickname} & ${brideNickname} Monogram`}
               fill
               className="object-contain"
               style={{
@@ -213,7 +213,7 @@ export function Countdown() {
         </h2>
         
         <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/95 font-light max-w-xl mx-auto leading-relaxed px-2">
-          Every heartbeat brings us closer to the moment when two hearts become one. Join {brideNickname} and {groomNickname} as they count down to forever.
+          Every heartbeat brings us closer to the moment when two hearts become one. Join {groomNickname} and {brideNickname} as they count down to forever.
         </p>
         
         {/* Decorative element below subtitle */}

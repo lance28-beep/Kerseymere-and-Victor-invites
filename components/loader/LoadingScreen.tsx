@@ -67,8 +67,8 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         <div className="relative flex items-center justify-center mb-8 sm:mb-12">
           <div className="relative w-28 sm:w-40 h-28 sm:h-40">
             <Image
-              src="/monogram/monogram.png"
-              alt="Kersey & Victor Monogram"
+              src="/monogram/newmonogram.png"
+              alt="Victor & Kersey Monogram"
               fill
               className="object-contain brightness-0 invert"
               priority
@@ -83,7 +83,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             className="text-2xl sm:text-3xl md:text-4xl text-white mb-6 sm:mb-8"
             style={{ fontFamily: '"Cinzel", serif', fontWeight: 500 }}
           >
-            Kersey & Victor
+            Victor & Kersey
           </h1>
 
           {/* Typewriter effect text */}
