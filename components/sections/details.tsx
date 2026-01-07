@@ -346,7 +346,7 @@ export function Details() {
                     onClick={() => setShowImageModal("guests")}
                   >
                     <Image
-                      src="/Details/guest.png"
+                      src="/Details/ladiesDress.png"
                       alt="Guest attire guideline"
                       fill
                       className="object-contain group-hover:scale-105 transition-transform duration-300"
@@ -594,7 +594,7 @@ export function Details() {
                     ? "/Details/sponsors.png"
                     : showImageModal === "entourage"
                     ? "/Details/entourage.png"
-                    : "/Details/guest.png"
+                    : "/Details/ladiesDress.png"
                 }
                 alt={
                   showImageModal === "ceremony"
