@@ -35,7 +35,7 @@ const faqItems: FAQItem[] = [
   {
     question: "How do I RSVP?",
     answer:
-      `Please RSVP on or before ${siteConfig.details.rsvp.deadline} through the RSVP section on this invitation. Simply search for your name in the guest list, confirm your attendance, and let us know if you'll be bringing companions. We kindly ask for your response to help us prepare for the big day.`,
+      `Please RSVP through the RSVP section on this invitation. Simply search for your name in the guest list, confirm your attendance, and let us know if you'll be bringing companions. We kindly ask for your response to help us prepare for the big day.`,
   },
   {
     question: "Can I bring a plus one or additional guests?",
@@ -45,7 +45,7 @@ const faqItems: FAQItem[] = [
   {
     question: "Is there a dress code?",
     answer:
-      `Yes! We kindly request our guests to dress in formal attire matching our wedding motif. Please see the Attire section in Details for specific guidelines:\n\nPrincipal Sponsors:\n• Male: ${siteConfig.dressCode.sponsors.male}\n• Female: ${siteConfig.dressCode.sponsors.female}\n\nWedding Guests:\n• Gents: ${siteConfig.dressCode.guests.gents}\n• Ladies: ${siteConfig.dressCode.guests.ladies}\n\n${siteConfig.dressCode.note}`,
+      `Yes! We kindly request our guests to dress in formal attire matching our wedding motif. Please see the Attire section in Details for specific guidelines:\n\nPrincipal Sponsors:\n• Female: Burgundy/Maroon Formal Dress\n• Male: Barong, Black Slacks, Leather Shoes\n\nEntourage:\n• Female: Burgundy Formal Dress\n• Male: White Long Sleeves, Black Slacks, Leather Shoes, Burgundy Vest & Bow Tie\n• Flower Girls: Burgundy Dress\n• Banner Bearer: Black Tuxedo\n\nWedding Guests:\n• Shades of Burgundy: Semi-formal\n• Please dress within our wedding colors to help create a soft, elegant romantic celebration.\n\n${siteConfig.dressCode.note}`,
   },
   {
     question: "Will there be assigned seating?",
