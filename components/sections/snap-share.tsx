@@ -23,9 +23,9 @@ export function SnapShare() {
   const websiteUrl = typeof window !== "undefined" ? window.location.href : "https://example.com"
   const driveLink = siteConfig.snapShare?.googleDriveLink || ""
   const hashtags = [
-    "#KerseyAndVictor2026",
-    "#KerseyVictorForever",
-    "#KerseyAndVictor"
+    "#VICTORfoundhisLucKERSEYcharm",
+    "#THORoadToForeverWithKERSEY",
+    "#KERSEYmadeVIComplete",
   ]
   const allHashtagsText = hashtags.join(" ")
   const groomNickname = siteConfig.couple.groomNickname
